@@ -88,11 +88,11 @@ public class Course implements Serializable {
         r.append("<form action=\"EditCourseService\" method=\"GET\">");
         r.append("\t\t\t<tr>\n");
         r.append(String.format("\t\t\t\t<td>%d</td>\n", this.getId()));
-        r.append(String.format("\t\t\t\t<td><input name=\"courseDescription\" value=\"%s\"></input></td>\n", this.getDescription()));
+        r.append(String.format("\t\t\t\t<td><input class=\"input\" name=\"courseDescription\" type=\"text\" value=\"%s\" title=\"%s\" required></input></td>\n", this.getDescription(), "Debe llenar todos los espacios"));
         r.append(String.format("\t\t\t\t<td><select name=\"thematicArea\">"));
         r.append(new SetThematicAreas().getHTMLThematicAreas());
         r.append(String.format("</select></td>\n"));
-        r.append(String.format("\t\t\t\t<td><button class =\"button\" name=\"idCourseM\" value=\"%d\">%s</button></td>\n", this.getId(),"Modificar"));
+        r.append(String.format("\t\t\t\t<td><button class =\"button\" name=\"idCourseM\" value=\"%d\">%s</button></td>\n", this.getId(), "Modificar"));
         r.append("\t\t\t</tr>\n");
         r.append("</form>");
         

@@ -18,7 +18,7 @@
             </h1>
             <%
                 try {
-
+                    
                     GenericUser user = (GenericUser) request.getSession(false).getAttribute("user");
                     String name = user.getLastName1() + " " + user.getLastName2() + ", " + user.getName();
 
