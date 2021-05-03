@@ -34,8 +34,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input name="idCourse"/></td>
-                                <td><input name="description"/></td>
+                                <td><input class="input" type="number" placeholder="ID" name="idCourse" min="1" title="Solo puede ingresar numeros" required/></td>
+                                <td><input class="input" type="text" placeholder="Descripción" name="description" title="Debe llenar todos los espacios" required/></td>
                                 <td><select name="thematicArea">${project:thematicAreas()}</select></td>
                                 <td><button class="button">Agregar curso</button></td>
                             </tr>
