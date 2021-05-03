@@ -1,0 +1,31 @@
+.tablaCursos {
+    border: none;
+    border-top: 2px solid darkslategrey;
+    border-bottom: 2px solid darkslategrey;
+    border-collapse: collapse;
+    font-size: smaller;
+}
+
+.tablaCursos th,
+.tablaCursos td {
+    border: none;
+    border-right: 1px solid darkslategrey;
+    padding: 4px 12px;
+}
+
+.tablaCursos tr td:nth-child(n+5) {
+    border-right: none;
+}
+
+.tablaCursos tbody tr:nth-child(odd) {
+    background-color: #b8c8d1;
+}
+
+.tablaCursos th {
+    background-color: darkslategrey;
+    border: none;
+    color: white;
+}
+
+.tablaCursos td {
+}

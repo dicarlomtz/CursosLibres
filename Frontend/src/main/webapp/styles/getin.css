@@ -1,0 +1,12 @@
+#sign-form {
+    position: fixed;
+    top: 20%;
+    left: 42%;
+    text-align: center;
+    margin-top:  -10px;
+    margin-left: -100px;
+}
+
+#sign-form form div , nav a{
+    margin:15px;
+}

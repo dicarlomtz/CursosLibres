@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+    <tlib-version>1.0</tlib-version>
+    <short-name>project</short-name>
+    <uri>/WEB-INF/tlds/project</uri>
+    <function>
+        <name>thematicAreas</name>
+        <function-class>model.beans.SetThematicAreas</function-class>
+        <function-signature>java.lang.String getHTMLThematicAreasStatic()</function-signature>
+    </function>
+    <function>
+        <name>userInfo</name>
+        <function-class>model.beans.GenericUser</function-class>
+        <function-signature>java.lang.String getHTMLInformation(model.beans.GenericUser)</function-signature>
+    </function>
+    <function>
+        <name>professorGroups</name>
+        <function-class>model.beans.SetCourseGroups</function-class>
+        <function-signature>java.lang.String getTableProfessorGroupsStatic(model.beans.GenericUser)</function-signature>
+    </function>
+    <function>
+        <name>schedules</name>
+        <function-class>model.beans.SetSchedules</function-class>
+        <function-signature>java.lang.String getTableSchedules(java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>schedulesAdmin</name>
+        <function-class>model.beans.SetSchedules</function-class>
+        <function-signature>java.lang.String getTableSchedulesAdmin(java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>specificCourse</name>
+        <function-class>model.beans.SetCourses</function-class>
+        <function-signature>java.lang.String getSpecificCourse(java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>groupEnrollments</name>
+        <function-class>model.beans.SetEnrollments</function-class>
+        <function-signature>java.lang.String getTableGroupNumber(model.beans.CourseGroup)</function-signature>
+    </function>
+    <function>
+        <name>areaProfessorsOption</name>
+        <function-class>model.beans.SetSpecialities</function-class>
+        <function-signature>java.lang.String getOptionsAreas(java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>courses</name>
+        <function-class>model.beans.SetCourses</function-class>
+        <function-signature>java.lang.String getTableCourses(java.lang.String)</function-signature>
+    </function>
+     <function>
+        <name>coursesAdmin</name>
+        <function-class>model.beans.SetCourses</function-class>
+        <function-signature>java.lang.String getTableCoursesAdmin(java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>thematicAreasProfessorOptions</name>
+        <function-class>model.beans.SetThematicAreas</function-class>
+        <function-signature>java.lang.String getHTMLProfessorOptionStatic()</function-signature>
+    </function>
+    <function>
+        <name>professors</name>
+        <function-class>model.beans.SetProfessors</function-class>
+        <function-signature>java.lang.String getTableStatic()</function-signature>
+    </function>
+    <function>
+        <name>enrollments</name>
+        <function-class>model.beans.SetEnrollments</function-class>
+        <function-signature>java.lang.String getHTMLStudentEnrollments(java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>generateHeader</name>
+        <function-class>frontend.model.GenerateHeader</function-class>
+        <function-signature>java.lang.String generateHeaderStatic(model.beans.GenericUser)</function-signature>
+    </function>
+</taglib>
