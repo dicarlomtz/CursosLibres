@@ -40,7 +40,7 @@ public class SignUpService extends HttpServlet {
             }
 
         } catch (Exception ex) {
-            request.setAttribute("message", "Usuario o contraseña no validos");
+            request.setAttribute("message", "Usuario o identificación no validos");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
     }

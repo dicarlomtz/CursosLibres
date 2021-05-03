@@ -12,7 +12,7 @@ import model.dao.EnrollmentDAO;
 @XmlType(name = "enrollments")
 public class SetEnrollments extends Set<String, Enrollment> {
 
-    public SetEnrollments() throws Exception {
+    public SetEnrollments() throws IOException {
         super(new EnrollmentDAO());
     }
 
@@ -27,16 +27,16 @@ public class SetEnrollments extends Set<String, Enrollment> {
     }
 
     @Override
-    public Enrollment retrieve(String id) throws Exception {
+    public Enrollment retrieve(String id) throws SQLException, IOException {
         return (Enrollment) dao.retrieve(id);
     }
 
      @Override
-    protected String toHTML() throws Exception {
+    protected String toHTML() throws SQLException, IOException {
        return null;
     }
 
-    public List<Enrollment> listAllGroupNumber(int groupNumber) throws Exception {
+    public List<Enrollment> listAllGroupNumber(int groupNumber) throws SQLException, IOException {
         List<Enrollment> enrollments = listAll();
         List<Enrollment> enrollmentGroupsNumber = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class SetEnrollments extends Set<String, Enrollment> {
         return enrollmentGroupsNumber;
     }
 
-    public String toHTMLAllGroupNumber(int groupNumber) throws Exception {
+    public String toHTMLAllGroupNumber(int groupNumber) throws SQLException, IOException {
         List<Enrollment> enrollments = listAllGroupNumber(groupNumber);
         StringBuilder r = new StringBuilder();
         for(Enrollment e : enrollments) {
@@ -58,7 +58,7 @@ public class SetEnrollments extends Set<String, Enrollment> {
         return r.toString();
     }
     
-    public String getTableGroupNumber(int groupNumber) throws Exception {
+    public String getTableGroupNumber(int groupNumber) throws SQLException, IOException {
         return toHTMLAllGroupNumber(groupNumber);
     }
     
@@ -71,7 +71,7 @@ public class SetEnrollments extends Set<String, Enrollment> {
         return "";
     }
  
-    public List<Enrollment> getListStudentEnrollments(int id) throws Exception
+    public List<Enrollment> getListStudentEnrollments(int id) throws SQLException, IOException
     {
         List<Enrollment> enrollments = listAll();
         List<Enrollment> aux = new ArrayList<>();
@@ -87,7 +87,7 @@ public class SetEnrollments extends Set<String, Enrollment> {
         return aux;
     }
     
-    protected String toHTMLStudentEnrollments(int id) throws Exception 
+    protected String toHTMLStudentEnrollments(int id) throws SQLException, IOException
     {
         List<Enrollment> enroll = getListStudentEnrollments(id);
         StringBuilder r = new StringBuilder();
@@ -100,7 +100,7 @@ public class SetEnrollments extends Set<String, Enrollment> {
         return r.toString();
     }
     
-    public String getHTMLStudentEnrollments(int id) throws Exception
+    public String getHTMLStudentEnrollments(int id) throws SQLException, IOException
     {
         return toHTMLStudentEnrollments(id);
     }

@@ -1,6 +1,7 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,19 +21,23 @@ public class EnrolledStudentsService extends HttpServlet {
 
         try {
             int idGroup = Integer.parseInt(request.getParameter(SELECTEDGROUP_ID_PARAM));
-            
+
             HttpSession session = request.getSession(true);
             GenericUser user = (GenericUser) session.getAttribute("user");
-            
+
             if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 2) {
-                
+
                 request.setAttribute("group", new SetCourseGroups().retrieve(idGroup));
                 request.getRequestDispatcher("enrollments.jsp").forward(request, response);
-                
+
             } else {
                 response.sendRedirect("index.jsp");
             }
-        } catch (Exception ex) {
+        } catch (IOException | SQLException ex) {
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+
+        } catch (NumberFormatException ex1) {
             response.sendRedirect("index.jsp");
         }
 

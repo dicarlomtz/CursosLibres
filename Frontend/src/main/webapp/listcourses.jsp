@@ -17,7 +17,7 @@
             <h1>
                 CursosLibres.com
             </h1>
-            <form action="FilterAllCoursesAdminService" method="GET" style="width: 50%;">
+            <form action="FilterAllCoursesAdminService" method="POST" style="width: 50%;">
                 <input class="input" name="busqueda" value="" style="width: 75%; padding: 10px 30px;" placeholder="Escriba aquí para buscar..." required="required"/>
                 <button class="button" type="submit">Buscar</button>
             </form>

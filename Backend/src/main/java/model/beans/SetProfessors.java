@@ -11,7 +11,7 @@ import model.dao.ProfessorDAO;
 @XmlType(name = "professors")
 public class SetProfessors extends Set<Integer, Professor> {
 
-    public SetProfessors() throws Exception {
+    public SetProfessors() throws IOException {
         super(new ProfessorDAO());
     }
 
@@ -26,12 +26,12 @@ public class SetProfessors extends Set<Integer, Professor> {
     }
 
     @Override
-    public Professor retrieve(Integer id) throws Exception {
+    public Professor retrieve(Integer id) throws SQLException, IOException {
         return (Professor) dao.retrieve(id);
     }
 
     @Override
-    protected String toHTML() throws Exception {
+    protected String toHTML() throws SQLException, IOException {
         StringBuilder r = new StringBuilder();
 
         List<Professor> list = listAll();
@@ -43,7 +43,7 @@ public class SetProfessors extends Set<Integer, Professor> {
         return r.toString();
     }
 
-    public String getTableProfessors() throws Exception {
+    public String getTableProfessors() throws SQLException, IOException {
         return toHTML();
     }
 

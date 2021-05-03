@@ -15,7 +15,7 @@ public abstract class Set<Key, Type> implements Serializable {
         this.dao = dao;
     }
 
-    public List<Type> listAll() throws Exception {
+    public List<Type> listAll() throws SQLException, IOException {
         return dao.listAll();
     }
 
@@ -23,7 +23,7 @@ public abstract class Set<Key, Type> implements Serializable {
         throw new UnsupportedOperationException();
     }
 
-    public String getTable() throws Exception {
+    public String getTable() throws SQLException, IOException {
         return toHTML();
     }
 
@@ -31,9 +31,9 @@ public abstract class Set<Key, Type> implements Serializable {
 
     public abstract void update(Type item) throws SQLException, IOException;
 
-    public abstract Type retrieve(Key id) throws Exception;
+    public abstract Type retrieve(Key id) throws SQLException, IOException;
     
-    protected abstract String toHTML() throws Exception;
+    protected abstract String toHTML() throws SQLException, IOException;
 
     @XmlTransient
     protected AbstractDAO dao;

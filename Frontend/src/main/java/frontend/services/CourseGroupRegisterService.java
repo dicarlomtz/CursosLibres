@@ -1,28 +1,42 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.beans.GenericUser;
 
 @WebServlet(name = "CourseGroupRegisterService", urlPatterns = {"/CourseGroupRegisterService"})
 public class CourseGroupRegisterService extends HttpServlet {
 
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String idCourse = (String) request.getParameter(COURSE_ID_PARAM);
+
         try {
-            request.setAttribute("idCourse", idCourse);
-            request.getRequestDispatcher("groupregister.jsp").forward(request, response);
-        } catch (Exception ex) {
+            String idCourse = (String) request.getParameter(COURSE_ID_PARAM);
+            if (Objects.isNull(idCourse)) {
+                throw new IllegalArgumentException();
+            }
+
+            HttpSession session = request.getSession(true);
+            GenericUser user = (GenericUser) session.getAttribute("user");
+
+            if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
+
+                request.setAttribute("idCourse", idCourse);
+                request.getRequestDispatcher("groupregister.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("index.jsp");
+            }
+        } catch (IllegalArgumentException ex) {
             response.sendRedirect("index.jsp");
         }
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,5 +79,5 @@ public class CourseGroupRegisterService extends HttpServlet {
     }// </editor-fold>
 
     private static final String COURSE_ID_PARAM = "idCourse";
-    
+
 }

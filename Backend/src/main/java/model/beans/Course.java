@@ -1,6 +1,8 @@
 package model.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -68,7 +70,7 @@ public class Course implements Serializable {
         r.append(String.format("\t\t\t\t<td>%s</td>\n", this.getDescription()));
         r.append(String.format("\t\t\t\t<td>%s</td>\n", this.getThematicArea().getDescription()));
         r.append(String.format("\t\t\t\t<td><form action=\"SchedulesAdminService\"><button class=\"button\" name=\"courseSchedules\" value=\"%s\">%s</button></form></td>\n", this.getId(), "Ver horario"));
-        r.append(String.format("\t\t\t\t<td><form action=\"CourseGroupRegisterService\" method=\"GET\"><button class=\"button\" name=\"idCourse\" value=\"%d\">%s</button></form></td>", this.getId(), "Abrir grupos"));
+        r.append(String.format("\t\t\t\t<td><form action=\"CourseGroupRegisterService\" method=\"POST\"><button class=\"button\" name=\"idCourse\" value=\"%d\">%s</button></form></td>", this.getId(), "Abrir grupos"));
         r.append(String.format("\t\t\t\t<td><form action=\"ModifyCourseService\" method=\"GET\"><button class=\"button\" name=\"idCourseM\" value=\"%d\">%s</button></form></td>", this.getId(), "Modificar"));
         r.append("\t\t\t</tr>\n");
         
@@ -79,7 +81,7 @@ public class Course implements Serializable {
         return toHTMLTableAdmin();
     }
     
-    public String toHTMLModify() throws Exception
+    public String toHTMLModify() throws IOException, SQLException
     {
         StringBuilder r = new StringBuilder();
         
@@ -97,7 +99,7 @@ public class Course implements Serializable {
         return r.toString();
     }
     
-    public String getHTMLModify() throws Exception{
+    public String getHTMLModify() throws IOException, SQLException{
         return toHTMLModify();
     }
     

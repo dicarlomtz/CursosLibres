@@ -16,18 +16,14 @@ public class AssignedGroupsService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        try {
-            GenericUser user = (GenericUser) request.getSession(true).getAttribute("user");
+        GenericUser user = (GenericUser) request.getSession(true).getAttribute("user");
 
-            if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 2) {
+        if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 2) {
 
-                request.getSession().setAttribute("id", user.getId());
-                request.getRequestDispatcher("assignedgroups.jsp").forward(request, response);
+            request.getSession().setAttribute("id", user.getId());
+            request.getRequestDispatcher("assignedgroups.jsp").forward(request, response);
 
-            } else {
-                response.sendRedirect("index.jsp");
-            }
-        } catch (IOException ex) {
+        } else {
             response.sendRedirect("index.jsp");
         }
 

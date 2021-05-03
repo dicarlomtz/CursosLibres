@@ -75,7 +75,8 @@ public class EnrollmentDAO extends AbstractDAO<String, Enrollment> {
     }
 
     @Override
-    public void delete(String id) throws SQLException, IOException {
+    public void delete(String id) 
+            throws SQLException, IOException {
         String[] parameters = id.split("-");
         int index = 1;
         try (Connection cnx = db.getConnection();

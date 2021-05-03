@@ -1,6 +1,7 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +17,14 @@ public class StudentEnrollmentsService extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         GenericUser user = (GenericUser) session.getAttribute("user");
+        
+        if(!Objects.isNull(user) && user.getAccData().getRol().getId() == 3){
 
         request.getSession().setAttribute("id", String.valueOf(user.getId()));
         request.getRequestDispatcher("student-enrollments.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("index.jsp");
+        }
 
     }
 

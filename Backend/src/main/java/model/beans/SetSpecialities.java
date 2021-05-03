@@ -11,7 +11,7 @@ import model.dao.SpecialityDAO;
 
 public class SetSpecialities extends Set<Integer, Speciality> {
 
-    public SetSpecialities() throws Exception {
+    public SetSpecialities() throws IOException {
         super(new SpecialityDAO());
     }
 
@@ -27,16 +27,16 @@ public class SetSpecialities extends Set<Integer, Speciality> {
     }
 
     @Override
-    public Speciality retrieve(Integer id) throws Exception {
+    public Speciality retrieve(Integer id) throws SQLException, IOException {
         return null;
     }
 
     @Override
-    protected String toHTML() throws Exception {
+    protected String toHTML() throws SQLException, IOException {
         return null;
     }
 
-     public List<Speciality> listAllSpecialitiesFilter(int idThematicArea) throws Exception {
+     public List<Speciality> listAllSpecialitiesFilter(int idThematicArea) throws SQLException, IOException {
         List<Speciality> specialities = listAll();
         List<Speciality> specialitiesFilter = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public class SetSpecialities extends Set<Integer, Speciality> {
         return specialitiesFilter;
     }
 
-    protected String toHTMLAllSpecialitiesFilter(int idThematicArea) throws Exception {
+    protected String toHTMLAllSpecialitiesFilter(int idThematicArea) throws SQLException, IOException {
         List<Speciality> specialities = listAllSpecialitiesFilter(idThematicArea);
         StringBuilder r = new StringBuilder();
 
@@ -61,7 +61,7 @@ public class SetSpecialities extends Set<Integer, Speciality> {
         return r.toString();
     }
 
-    public String getOptionsAreas(int idThematicArea) throws Exception {
+    public String getOptionsAreas(int idThematicArea) throws SQLException, IOException {
         return toHTMLAllSpecialitiesFilter(idThematicArea);
     }
     

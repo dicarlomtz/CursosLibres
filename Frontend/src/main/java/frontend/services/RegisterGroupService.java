@@ -1,30 +1,47 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.FreeCourses;
+import model.beans.GenericUser;
 
 @WebServlet(name = "RegisterGroupService", urlPatterns = {"/RegisterGroupService"})
 public class RegisterGroupService extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        int idProfessor = Integer.parseInt(request.getParameter(PROFESOR_ID_PARAM));
-        int idCourse = Integer.parseInt(request.getParameter(COURSE_ID_PARAM));
-        int day = Integer.parseInt(request.getParameter(DAY_ID_PARAM));
-        int hour = Integer.parseInt(request.getParameter(HOUR_ID_PARAM));
-        int groupNumber = Integer.parseInt(request.getParameter(GROUP_NUMBER_ID_PARAM));
-        
-        try {   
-            new FreeCourses().registerGroup(idCourse, groupNumber, idProfessor, day, hour);
-            response.sendRedirect("adminpanel.jsp");
-        } catch (Exception ex) {
+        try {
+            
+            int idProfessor = Integer.parseInt(request.getParameter(PROFESOR_ID_PARAM));
+            int idCourse = Integer.parseInt(request.getParameter(COURSE_ID_PARAM));
+            int day = Integer.parseInt(request.getParameter(DAY_ID_PARAM));
+            int hour = Integer.parseInt(request.getParameter(HOUR_ID_PARAM));
+            int groupNumber = Integer.parseInt(request.getParameter(GROUP_NUMBER_ID_PARAM));
+            
+            HttpSession session = request.getSession(true);
+            GenericUser user = (GenericUser) session.getAttribute("user");
+            
+            if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
+                
+                new FreeCourses().registerGroup(idCourse, groupNumber, idProfessor, day, hour);
+                response.sendRedirect("adminpanel.jsp");
+                
+            } else {
+                response.sendRedirect("index.jsp");
+            }
+        } catch (IOException | SQLException ex) {
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } catch (NumberFormatException ex) {
             response.sendRedirect("index.jsp");
         }
         

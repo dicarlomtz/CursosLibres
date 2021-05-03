@@ -1,10 +1,13 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.beans.GenericUser;
 import model.beans.SearchFilter;
 
 public class FilterAllCoursesAdminService extends HttpServlet {
@@ -12,9 +15,26 @@ public class FilterAllCoursesAdminService extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String parameterSearch = request.getParameter(PARAMETER_ID_PARAM);
-        request.setAttribute("searchParameter", new SearchFilter(parameterSearch));
-        request.getRequestDispatcher("listcourses.jsp").forward(request, response);
+
+        try {
+            String parameterSearch = request.getParameter(PARAMETER_ID_PARAM);
+            if(Objects.isNull(parameterSearch)){
+                throw new IllegalArgumentException();
+            }
+
+            HttpSession session = request.getSession(true);
+            GenericUser user = (GenericUser) session.getAttribute("user");
+
+            if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
+                request.setAttribute("searchParameter", new SearchFilter(parameterSearch));
+                request.getRequestDispatcher("listcourses.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("index.jsp");
+            }
+
+        } catch (IllegalArgumentException ex) {
+            response.sendRedirect("index.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,6 +76,6 @@ public class FilterAllCoursesAdminService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static String PARAMETER_ID_PARAM = "parameter";
+    private static final String PARAMETER_ID_PARAM = "parameter";
 
 }

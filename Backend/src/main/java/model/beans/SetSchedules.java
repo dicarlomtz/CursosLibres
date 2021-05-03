@@ -12,7 +12,7 @@ import model.dao.ScheduleDAO;
 
 public class SetSchedules extends Set<Integer, Schedule>
 {
-    public SetSchedules() throws Exception
+    public SetSchedules() throws IOException
     {
         super(new ScheduleDAO());
     }
@@ -32,18 +32,18 @@ public class SetSchedules extends Set<Integer, Schedule>
     }
 
     @Override
-    public Schedule retrieve(Integer id) throws Exception
+    public Schedule retrieve(Integer id) throws SQLException, IOException
     {
         return (Schedule) dao.retrieve(id);
     }
 
     @Override
-    protected String toHTML() throws Exception
+    protected String toHTML() throws SQLException, IOException
     {
         return null;
     }
     
-    public List<Schedule> listAllScheduleFilter(int idCourse) throws Exception
+    public List<Schedule> listAllScheduleFilter(int idCourse) throws SQLException, IOException
     {
         List<Schedule> schedule = listAll();
         List<Schedule> scheduleFiltrer = new ArrayList<>();
@@ -59,7 +59,7 @@ public class SetSchedules extends Set<Integer, Schedule>
         return scheduleFiltrer;
     }
     
-    protected String toHTMLAllSchedules(int idCourse) throws Exception
+    protected String toHTMLAllSchedules(int idCourse) throws SQLException, IOException
     {
         List<Schedule> schedule = listAllScheduleFilter(idCourse);
         StringBuilder r = new StringBuilder();
@@ -72,7 +72,7 @@ public class SetSchedules extends Set<Integer, Schedule>
         return r.toString();
     }
     
-    public String getTableSchedules(int idCourse) throws Exception
+    public String getTableSchedules(int idCourse) throws SQLException, IOException
     {
         return toHTMLAllSchedules(idCourse);
     }
@@ -87,7 +87,7 @@ public class SetSchedules extends Set<Integer, Schedule>
     }
     
     
-    protected String toHTMLAllSchedulesAdmin(int idCourse) throws Exception
+    protected String toHTMLAllSchedulesAdmin(int idCourse) throws SQLException, IOException
     {
         List<Schedule> schedule = listAllScheduleFilter(idCourse);
         StringBuilder r = new StringBuilder();
@@ -100,7 +100,7 @@ public class SetSchedules extends Set<Integer, Schedule>
         return r.toString();
     }
     
-    public String getTableSchedulesAdmin(int idCourse) throws Exception
+    public String getTableSchedulesAdmin(int idCourse) throws SQLException, IOException
     {
         return toHTMLAllSchedulesAdmin(idCourse);
     }

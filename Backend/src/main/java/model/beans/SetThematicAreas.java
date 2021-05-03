@@ -9,7 +9,7 @@ import model.dao.ThematicAreaDAO;
 
 public class SetThematicAreas extends Set<Integer, ThematicArea> {
 
-    public SetThematicAreas() throws Exception {
+    public SetThematicAreas() throws IOException {
         super(new ThematicAreaDAO());
     }
 
@@ -24,18 +24,22 @@ public class SetThematicAreas extends Set<Integer, ThematicArea> {
     }
 
     @Override
-    public ThematicArea retrieve(Integer id) throws Exception {
+    public ThematicArea retrieve(Integer id) throws SQLException, IOException {
         return (ThematicArea) dao.retrieve(id);
     }
 
     @Override
-    protected String toHTML() throws Exception {
+    protected String toHTML() throws SQLException, IOException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    protected String toHTMLProfessorOption() throws Exception {
+    protected String toHTMLProfessorOption() throws SQLException, IOException {
         StringBuilder r = new StringBuilder();
         List<ThematicArea> list = listAll();
+
+        if (list.isEmpty()) {
+            r.append("<p>No hay especialidades disponibles</p>");
+        }
 
         for (ThematicArea ta : list) {
             r.append(ta.getHTMLProfessorSpecialityOption());
@@ -44,7 +48,7 @@ public class SetThematicAreas extends Set<Integer, ThematicArea> {
         return r.toString();
     }
 
-    public String getHTMLProfessorOption() throws Exception {
+    public String getHTMLProfessorOption() throws SQLException, IOException {
         return toHTMLProfessorOption();
     }
 
@@ -57,7 +61,7 @@ public class SetThematicAreas extends Set<Integer, ThematicArea> {
         return "";
     }
 
-    protected String toHTMLThematicAreas() throws Exception {
+    protected String toHTMLThematicAreas() throws SQLException, IOException {
         List<ThematicArea> list = listAll();
         StringBuilder r = new StringBuilder();
 
@@ -68,15 +72,15 @@ public class SetThematicAreas extends Set<Integer, ThematicArea> {
         return r.toString();
     }
 
-    public String getHTMLThematicAreas() throws Exception {
+    public String getHTMLThematicAreas() throws SQLException, IOException {
         return toHTMLThematicAreas();
     }
-    
+
     public static String getHTMLThematicAreasStatic() {
         try {
             return new SetThematicAreas().getHTMLThematicAreas();
         } catch (Exception ex) {
-           
+
         }
         return "";
     }

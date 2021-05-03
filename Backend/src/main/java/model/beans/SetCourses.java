@@ -10,7 +10,7 @@ import model.dao.CourseDAO;
 @XmlType(name = "course")
 public class SetCourses extends Set<Integer, Course> {
 
-    public SetCourses() throws Exception {
+    public SetCourses() throws IOException {
         super(new CourseDAO());
     }
 
@@ -25,16 +25,16 @@ public class SetCourses extends Set<Integer, Course> {
     }
 
     @Override
-    public Course retrieve(Integer id) throws Exception {
+    public Course retrieve(Integer id) throws SQLException, IOException {
         return (Course) dao.retrieve(id);
     }
 
     @Override
-    protected String toHTML() throws Exception {
+    protected String toHTML() throws SQLException, IOException {
         return null;
     }
 
-    public List<Course> listAllCourses(String filter) throws Exception {
+    public List<Course> listAllCourses(String filter) throws SQLException, IOException {
         List<Course> courses = listAll();
         List<Course> coursesFilter = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class SetCourses extends Set<Integer, Course> {
         return coursesFilter;
     }
 
-    protected String toHTMLAllCourses(String filter) throws Exception {
+    protected String toHTMLAllCourses(String filter) throws SQLException, IOException {
         List<Course> courses = listAllCourses(filter);
         StringBuilder r = new StringBuilder();
 
@@ -59,7 +59,7 @@ public class SetCourses extends Set<Integer, Course> {
         return r.toString();
     }
 
-    public String getTableAllCourses(String filter) throws Exception {
+    public String getTableAllCourses(String filter) throws SQLException, IOException {
         return toHTMLAllCourses(filter);
     }
 
@@ -72,7 +72,7 @@ public class SetCourses extends Set<Integer, Course> {
         return "";
     }
 
-    protected String toHTMLAllCoursesAdmin(String filter) throws Exception {
+    protected String toHTMLAllCoursesAdmin(String filter) throws SQLException, IOException {
         List<Course> courses = listAllCourses(filter);
         StringBuilder r = new StringBuilder();
 
@@ -83,7 +83,7 @@ public class SetCourses extends Set<Integer, Course> {
         return r.toString();
     }
 
-    public String getTableAllCoursesAdmin(String filter) throws Exception {
+    public String getTableAllCoursesAdmin(String filter) throws SQLException, IOException {
         return toHTMLAllCoursesAdmin(filter);
     }
 
@@ -96,7 +96,7 @@ public class SetCourses extends Set<Integer, Course> {
         return "";
     }
 
-    public String toHTMLSpecificCourse(int id) throws Exception {
+    public String toHTMLSpecificCourse(int id) throws SQLException, IOException {
         StringBuilder r = new StringBuilder();
         Course course = retrieve(id);
 

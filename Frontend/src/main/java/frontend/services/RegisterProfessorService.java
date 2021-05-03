@@ -1,13 +1,17 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.FreeCourses;
+import model.beans.GenericUser;
 import model.beans.SetProfessors;
 import model.beans.SetSpecialities;
 import model.beans.SetThematicAreas;
@@ -20,30 +24,44 @@ public class RegisterProfessorService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        Enumeration<String> parameters = request.getParameterNames();
-        int identification = Integer.parseInt(request.getParameter(parameters.nextElement()));
-        String lastName1 = request.getParameter(parameters.nextElement());
-        String lastName2 = request.getParameter(parameters.nextElement());
-        String name = request.getParameter(parameters.nextElement());
-        int telephoneNumber = Integer.parseInt(request.getParameter(parameters.nextElement()));
-        String email = request.getParameter(parameters.nextElement());
-        String userName = request.getParameter(parameters.nextElement());
-
-        FreeCourses logic = new FreeCourses();
-
         try {
 
-            String password = logic.signUpProfessor(identification, lastName1, lastName2, name, telephoneNumber, email, userName);
-            SetSpecialities ss = new SetSpecialities();
-            while (parameters.hasMoreElements()) {
-                ss.add(new Speciality(new SetProfessors().retrieve(identification), new SetThematicAreas().retrieve(Integer.parseInt(request.getParameter(parameters.nextElement())))));
-            }
-            request.setAttribute("message", String.format("Registro con exito, su clave es: %s", password));
-            request.getRequestDispatcher("professorregister.jsp").forward(request, response);
+            Enumeration<String> parameters = request.getParameterNames();
+            int identification = Integer.parseInt(request.getParameter(parameters.nextElement()));
+            String lastName1 = request.getParameter(parameters.nextElement());
+            String lastName2 = request.getParameter(parameters.nextElement());
+            String name = request.getParameter(parameters.nextElement());
+            int telephoneNumber = Integer.parseInt(request.getParameter(parameters.nextElement()));
+            String email = request.getParameter(parameters.nextElement());
+            String userName = request.getParameter(parameters.nextElement());
 
-        } catch (Exception ex) {
-            request.setAttribute("message", ex.toString());
+            FreeCourses logic = new FreeCourses();
+
+            HttpSession session = request.getSession(true);
+            GenericUser user = (GenericUser) session.getAttribute("user");
+
+            if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
+                if (parameters.hasMoreElements()) {
+                    String password = logic.signUpProfessor(identification, lastName1, lastName2, name, telephoneNumber, email, userName);
+                    SetSpecialities ss = new SetSpecialities();
+                    while (parameters.hasMoreElements()) {
+                        ss.add(new Speciality(new SetProfessors().retrieve(identification), new SetThematicAreas().retrieve(Integer.parseInt(request.getParameter(parameters.nextElement())))));
+                    }
+                    request.setAttribute("message", String.format("Registro con exito, su clave es: %s", password));
+                    request.getRequestDispatcher("professorregister.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("message", "Debe seleccionar al menos una especialidad");
+                    request.getRequestDispatcher("professorregister.jso").forward(request, response);
+                }
+            } else {
+                response.sendRedirect("index.jsp");
+            }
+
+        }  catch (IOException | SQLException ex) {
+            request.setAttribute("message", "Usuario o identificación invalidos");
             request.getRequestDispatcher("professorregister.jsp").forward(request, response);
+        } catch(NumberFormatException ex1) {
+            response.sendRedirect("index.jsp");
         }
     }
 

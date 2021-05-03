@@ -2,7 +2,6 @@ package model;
 
 import java.io.IOException;
 import model.beans.SetSchedules;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Objects;
@@ -24,7 +23,6 @@ import model.dao.AdministratorDAO;
 import model.dao.ConditionDAO;
 import model.dao.CourseDAO;
 import model.dao.CourseGroupDAO;
-import model.dao.DaoDB;
 import model.dao.EnrollmentDAO;
 import model.dao.ProfessorDAO;
 import model.dao.RolDAO;
@@ -42,12 +40,11 @@ public class FreeCourses {
         GenericUser user = null;
         try {
             user = new StudentDAO().retrieve(indentification);
-
-        } catch (Exception ex) {
+        } catch (IOException | SQLException ex) {
 
             try {
                 user = new ProfessorDAO().retrieve(indentification);
-            } catch (Exception ex1) {
+            } catch (IOException | SQLException ex1) {
                 user = new AdministratorDAO().retrieve(indentification);
             }
         }
@@ -74,7 +71,7 @@ public class FreeCourses {
         return password;
     }
 
-    public String signUpProfessor(int identification, String lastName1, String lastName2, String name, int telephoneNumber, String email, String userName) throws Exception {
+    public String signUpProfessor(int identification, String lastName1, String lastName2, String name, int telephoneNumber, String email, String userName) throws IOException, SQLException {
         UserAccountData accData;
         String password = RandomPassword.getInstance().generate();
         RolDAO dao = new RolDAO();
@@ -101,7 +98,7 @@ public class FreeCourses {
         return "";
     }
 
-    public void assignNote(String identifier, int grade) throws Exception {
+    public void assignNote(String identifier, int grade) throws IOException, SQLException {
         Enrollment e = new EnrollmentDAO().retrieve(identifier);
         e.setGrade(grade);
         if (e.getGrade() >= 7) {
@@ -153,7 +150,7 @@ public class FreeCourses {
         return "";
     }
 
-    public void registerGroup(int idCourse, int groupNumber, int idProfessor, int day, int hour) throws Exception {
+    public void registerGroup(int idCourse, int groupNumber, int idProfessor, int day, int hour) throws IOException, SQLException {
         CourseGroup cp = new CourseGroup(groupNumber, new CourseDAO().retrieve(idCourse), new ProfessorDAO().retrieve(idProfessor));
         new CourseGroupDAO().add(cp.getGroupNumber(), cp);
         new ScheduleDAO().add(0, new Schedule(0, cp, cp.getCourse(), day, hour));

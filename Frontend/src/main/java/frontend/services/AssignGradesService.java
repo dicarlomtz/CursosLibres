@@ -1,8 +1,11 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,31 +22,28 @@ public class AssignGradesService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        try {
+        HttpSession session = request.getSession(true);
+        GenericUser user = (GenericUser) session.getAttribute("user");
 
-            HttpSession session = request.getSession(true);
-            GenericUser user = (GenericUser) session.getAttribute("user");
+        if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 2) {
 
-            if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 2) {
+            Enumeration<String> identifiers = request.getParameterNames();
+            FreeCourses logic = new FreeCourses();
 
-                Enumeration<String> identifiers = request.getParameterNames();
-                FreeCourses logic = new FreeCourses();
-
-                while (identifiers.hasMoreElements()) {
-                    try {
-                        String identifier = identifiers.nextElement();
-                        int grade = Integer.parseInt(request.getParameter(identifier));
-                        logic.assignNote(identifier, grade);
-                        response.sendRedirect("professorpanel.jsp");
-                    } catch (Exception ex) {
-                        response.sendRedirect("index.jsp");
-                    }
+            while (identifiers.hasMoreElements()) {
+                try {
+                    String identifier = identifiers.nextElement();
+                    int grade = Integer.parseInt(request.getParameter(identifier));
+                    logic.assignNote(identifier, grade);
+                    response.sendRedirect("professorpanel.jsp");
+                } catch (NumberFormatException e) {
+                    response.sendRedirect("index.jsp");
+                } catch (SQLException | IOException ex) {
+                    request.setAttribute("message", "No es posible accesar a la información");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
-            } else {
-                response.sendRedirect("index.jsp");
             }
-
-        } catch (Exception ex) {
+        } else {
             response.sendRedirect("index.jsp");
         }
 

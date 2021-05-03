@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.annotation.XmlType;
 import model.dao.CourseGroupDAO;
 
 @XmlType(name = "courseGroups")
 public class SetCourseGroups extends Set<Integer, CourseGroup> {
 
-    public SetCourseGroups() throws Exception {
+    public SetCourseGroups() throws IOException {
         super(new CourseGroupDAO());
     }
 
@@ -27,16 +25,16 @@ public class SetCourseGroups extends Set<Integer, CourseGroup> {
     }
 
     @Override
-    public CourseGroup retrieve(Integer id) throws Exception {
+    public CourseGroup retrieve(Integer id) throws SQLException, IOException {
         return (CourseGroup) dao.retrieve(id);
     }
 
     @Override
-    protected String toHTML() throws Exception {
+    protected String toHTML() throws SQLException, IOException {
         return null;
     }
 
-    public List<CourseGroup> listAllProfessorId(int id) throws Exception {
+    public List<CourseGroup> listAllProfessorId(int id) throws SQLException, IOException {
         List<CourseGroup> groups = listAll();
         List<CourseGroup> groupsProfessor = new ArrayList<>();
 
@@ -49,7 +47,7 @@ public class SetCourseGroups extends Set<Integer, CourseGroup> {
         return groupsProfessor;
     }
 
-    protected String toHTMLAllProfessorGroups(int id) throws Exception {
+    protected String toHTMLAllProfessorGroups(int id) throws SQLException, IOException {
         List<CourseGroup> groups = listAllProfessorId(id);
         StringBuilder r = new StringBuilder();
         for (CourseGroup g : groups) {
@@ -58,7 +56,7 @@ public class SetCourseGroups extends Set<Integer, CourseGroup> {
         return r.toString();
     }
 
-    public String getTableProfessorGroups(int id) throws Exception {
+    public String getTableProfessorGroups(int id) throws SQLException, IOException {
         return toHTMLAllProfessorGroups(id);
     }
     

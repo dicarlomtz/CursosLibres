@@ -21,27 +21,27 @@
                 </header>
                 <div id="main-contents-wrapper">
                     <div id="sign-form">
-                        <form action="RegisterProfessorService" method="GET">
+                        <form action="RegisterProfessorService" method="POST">
                             <div>
-                                <input class="input" type="number" name="identification" placeholder="Identificación" pattern="[1-9]{9}" title="Debe ingresar el formato: XXXXXXXXX" required="required">
+                                <input class="input" type="number" name="identification" placeholder="Identificación" min="100000000" max="999999999" title="Debe ingresar el formato: XXXXXXXXX" required>
                             </div>
                             <div>
-                                <input class="input" type="text" name="lastName1" placeholder="Primer apellido" title="Solo puede ingresar letras" required="required">
+                                <input class="input" type="text" name="lastName1" placeholder="Primer apellido" pattern="[A-Za-z]" title="Solo puede ingresar letras" required>
                             </div>
                             <div>
-                                <input class="input" type="text" name="lastName2" placeholder="Segundo apellido" title="Solo puede ingresar letras" required="required">
+                                <input class="input" type="text" name="lastName2" placeholder="Segundo apellido" pattern="[A-Za-z]" title="Solo puede ingresar letras" required>
                             </div>
                             <div>
-                                <input class="input" type="text" name="name" placeholder="Nombre" title="Solo puede ingresar letras" required="required">
+                                <input class="input" type="text" name="name" placeholder="Nombre" pattern="[A-Za-z]" title="Solo puede ingresar letras" required>
                             </div>
                             <div>
-                                <input class="input" type="number" name="telephoneNumber" placeholder="Número telefónico" pattern="[1-9]{8}" title="Debe ingresar el formato: XXXXXXXX" required="required">
+                                <input class="input" type="number" name="telephoneNumber" placeholder="Número telefónico" min="10000000" max="99999999" title="Debe ingresar el formato: XXXXXXXX" required>
                             </div>
                             <div>
-                                <input class="input" type="email" name="email" placeholder="E-mail" required="required">
+                                <input class="input" type="email" name="email" placeholder="E-mail" required>
                             </div>
                             <div>
-                                <input class="input" type="text" name="userName" placeholder="Usuario" required="required">
+                                <input class="input" type="text" name="userName" placeholder="Usuario" required>
                             </div>
                         ${project:thematicAreasProfessorOptions()}
                         <button class="button" type="submit">Registrarme</button>
