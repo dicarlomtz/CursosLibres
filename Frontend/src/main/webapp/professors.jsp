@@ -9,27 +9,27 @@
         <title>Profesores</title>
     </head>
     <body>
+        <div>
+            <header>
+                <h1>
+                    CursosLibres.com
+                </h1>
+                <form action="index.jsp">
+                    <button class="button">Página principal</button>
+                </form>
+            </header>
             <div>
-                <header>
-                    <h1>
-                        CursosLibres.com
-                    </h1>
-                    <form action="index.jsp">
-                        <button class="button">Página principal</button>
-                    </form>
-                </header>
                 <div>
-                    <div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Identificacion</th>
-                                    <th>Nombre</th>
-                                    <th>E-mail</th>
-                                    <th>Teléfono</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Identificacion</th>
+                                <th>Nombre</th>
+                                <th>E-mail</th>
+                                <th>Teléfono</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             ${project:professors()}
                         </tbody>
                         <tfoot>

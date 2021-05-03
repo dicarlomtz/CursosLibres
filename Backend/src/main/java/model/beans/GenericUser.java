@@ -97,11 +97,16 @@ public class GenericUser implements Serializable {
 
         return r.toString();
     }
-
+    
     public String getHTMLInformation() {
         return toHTMLInformation();
     }
 
+    public static String getCompleteName(GenericUser user)
+    {
+        return user.getLastName1() + " " + user.getLastName2() + ", " + user.getName();
+    }
+    
     public static String getHTMLInformation(GenericUser user) {
         return user.getHTMLInformation();
     }

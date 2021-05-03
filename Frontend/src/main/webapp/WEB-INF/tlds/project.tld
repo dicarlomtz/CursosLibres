@@ -14,6 +14,11 @@
         <function-signature>java.lang.String getHTMLInformation(model.beans.GenericUser)</function-signature>
     </function>
     <function>
+        <name>CompleteName</name>
+        <function-class>model.beans.GenericUser</function-class>
+        <function-signature>java.lang.String getCompleteName(model.beans.GenericUser)</function-signature>
+    </function>
+    <function>
         <name>professorGroups</name>
         <function-class>model.beans.SetCourseGroups</function-class>
         <function-signature>java.lang.String getTableProfessorGroupsStatic(model.beans.GenericUser)</function-signature>
