@@ -1,5 +1,3 @@
-<%@page import="model.FreeCourses"%>
-<%@page import="model.beans.GenericUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="/WEB-INF/tlds/project.tld" prefix="project"%>
 <!DOCTYPE html>
