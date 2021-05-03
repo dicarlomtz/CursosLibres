@@ -1,6 +1,7 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,31 +12,37 @@ import model.beans.GenericUser;
 
 @WebServlet(name = "PanelService", urlPatterns = {"/PanelService"})
 public class PanelService extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        
         HttpSession session = request.getSession(true);
         GenericUser user = (GenericUser) session.getAttribute("user");
-        int idRol = user.getAccData().getRol().getId();
-
-        switch (idRol) {
-            case 3: 
-                request.getSession().setAttribute("user", user);
-                request.getRequestDispatcher("studentpanel.jsp").forward(request, response);
-                break;
-            case 2:
-                request.getSession().setAttribute("user", user);
-                request.getRequestDispatcher("professorpanel.jsp").forward(request, response);
-                break;
-            case 1:
-                request.getSession().setAttribute("user", user);
-                request.getRequestDispatcher("adminpanel.jsp").forward(request, response);
-                break;
-            default:
-                response.sendRedirect("index.jsp");
-                break;
+        
+        if (!Objects.isNull(user)) {
+            
+            int idRol = user.getAccData().getRol().getId();
+            
+            switch (idRol) {
+                case 3:                    
+                    request.getSession().setAttribute("user", user);
+                    request.getRequestDispatcher("studentpanel.jsp").forward(request, response);
+                    break;
+                case 2:
+                    request.getSession().setAttribute("user", user);
+                    request.getRequestDispatcher("professorpanel.jsp").forward(request, response);
+                    break;
+                case 1:
+                    request.getSession().setAttribute("user", user);
+                    request.getRequestDispatcher("adminpanel.jsp").forward(request, response);
+                    break;
+                default:
+                    response.sendRedirect("index.jsp");
+                    break;
+            }
+        } else {
+            response.sendRedirect("index.jsp");
         }
     }
 

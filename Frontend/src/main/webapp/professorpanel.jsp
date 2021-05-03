@@ -21,7 +21,7 @@
             <div id="wrapper">
                 <div id="contents">
                 ${project:userInfo(user)} 
-                <form action="AssignedGroupsService" method="GET">
+                <form action="AssignedGroupsService" method="POST">
                     <input class="button" type="submit" value="Ver grupos asignados" />
                 </form>
             </div>

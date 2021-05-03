@@ -1,6 +1,7 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,24 +18,28 @@ public class SignInService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int indentification = Integer.parseInt(request.getParameter(IDENTIFICATION_ID_PARAM));
-        String password = request.getParameter(PASSWORD_ID_PARAM);
-
-        FreeCourses logic = new FreeCourses();
-
         try {
 
-            GenericUser user = logic.signIn(indentification, password);
+            int indentification = Integer.parseInt(request.getParameter(IDENTIFICATION_ID_PARAM));
+            String password = request.getParameter(PASSWORD_ID_PARAM);
+
+            FreeCourses logic = new FreeCourses();
 
             HttpSession session = request.getSession(true);
-            session.setAttribute("user", user);
-            
-            
-            session.setAttribute("id", user.getId());
+
+            if (Objects.isNull(session.getAttribute("user"))) {
+
+                GenericUser user = logic.signIn(indentification, password);
+
+                session.setAttribute("user", user);
+
+                session.setAttribute("id", user.getId());
+            }
+
             response.sendRedirect("index.jsp");
 
         } catch (Exception ex) {
-            request.setAttribute("message", ex.toString());
+            request.setAttribute("message", "Identificación o contraseña incorrectos");
             request.getRequestDispatcher("signin.jsp").forward(request, response);
         }
 
@@ -81,5 +86,5 @@ public class SignInService extends HttpServlet {
 
     private static final String IDENTIFICATION_ID_PARAM = "identification";
     private static final String PASSWORD_ID_PARAM = "password";
-    
+
 }

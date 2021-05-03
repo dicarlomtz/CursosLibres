@@ -2,12 +2,15 @@ package frontend.services;
 
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.FreeCourses;
+import model.beans.GenericUser;
 
 @WebServlet(name = "AssignGradesService", urlPatterns = {"/AssignGradesService"})
 public class AssignGradesService extends HttpServlet {
@@ -16,18 +19,32 @@ public class AssignGradesService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        Enumeration<String> identifiers = request.getParameterNames();
-        FreeCourses logic = new FreeCourses();
-            
-        while (identifiers.hasMoreElements()) {
-            try {
-                String identifier = identifiers.nextElement();
-                int grade = Integer.parseInt(request.getParameter(identifier));
-                logic.assignNote(identifier, grade);
-                response.sendRedirect("professorpanel.jsp");
-            } catch (Exception ex) {
+        try {
+
+            HttpSession session = request.getSession(true);
+            GenericUser user = (GenericUser) session.getAttribute("user");
+
+            if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 2) {
+
+                Enumeration<String> identifiers = request.getParameterNames();
+                FreeCourses logic = new FreeCourses();
+
+                while (identifiers.hasMoreElements()) {
+                    try {
+                        String identifier = identifiers.nextElement();
+                        int grade = Integer.parseInt(request.getParameter(identifier));
+                        logic.assignNote(identifier, grade);
+                        response.sendRedirect("professorpanel.jsp");
+                    } catch (Exception ex) {
+                        response.sendRedirect("index.jsp");
+                    }
+                }
+            } else {
                 response.sendRedirect("index.jsp");
             }
+
+        } catch (Exception ex) {
+            response.sendRedirect("index.jsp");
         }
 
     }

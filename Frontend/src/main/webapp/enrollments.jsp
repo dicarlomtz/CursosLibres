@@ -21,7 +21,7 @@
                 </header>
                 <div>
                     <div>
-                        <form action="AssignGradesService" method="GET">
+                        <form action="AssignGradesService" method="POST">
                             <table class="table">
                                 <thead>
                                     <tr>

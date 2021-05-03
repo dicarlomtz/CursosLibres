@@ -1,7 +1,9 @@
 package model;
 
+import java.io.IOException;
 import model.beans.SetSchedules;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -51,13 +53,13 @@ public class FreeCourses {
         }
 
         if (Objects.isNull(user) || !user.getAccData().getPassword().equals(password)) {
-            throw new IllegalArgumentException("Usuario y contraseña invalidos");
+            throw new IllegalArgumentException();
         }
 
         return user;
     }
 
-    public String signUp(int identification, String lastName1, String lastName2, String name, int telephoneNumber, String email, String userName) throws Exception {
+    public String signUp(int identification, String lastName1, String lastName2, String name, int telephoneNumber, String email, String userName) throws IOException, SQLException {
 
         UserAccountData accData;
         String password = RandomPassword.getInstance().generate();

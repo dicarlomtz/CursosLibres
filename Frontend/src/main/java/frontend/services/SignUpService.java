@@ -1,11 +1,13 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.FreeCourses;
 
 @WebServlet(name = "SignUpService", urlPatterns = {"/SignUpService"})
@@ -15,24 +17,30 @@ public class SignUpService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int identification = Integer.parseInt(request.getParameter(IDENTIFICATION_ID_PARAM));
-        String lastName1 = request.getParameter(LASTNAME1_ID_PARAM);
-        String lastName2 = request.getParameter(LASTNAME2_ID_PARAM);
-        String name = request.getParameter(NAME_ID_PARAM);
-        int telephoneNumber = Integer.parseInt(request.getParameter(TELEPHONENUMBER_ID_PARAM));
-        String email = request.getParameter(EMAIL_ID_PARAM);
-        String userName = request.getParameter(USERNAME_ID_PARAM);
-
-        FreeCourses logic = new FreeCourses();
-
         try {
 
-            String password = logic.signUp(identification, lastName1, lastName2, name, telephoneNumber, email, userName);
-            request.setAttribute("message", String.format("Registro con exito, su clave es: %s", password));
-            request.getRequestDispatcher("signin.jsp").forward(request, response);
+            int identification = Integer.parseInt(request.getParameter(IDENTIFICATION_ID_PARAM));
+            String lastName1 = request.getParameter(LASTNAME1_ID_PARAM);
+            String lastName2 = request.getParameter(LASTNAME2_ID_PARAM);
+            String name = request.getParameter(NAME_ID_PARAM);
+            int telephoneNumber = Integer.parseInt(request.getParameter(TELEPHONENUMBER_ID_PARAM));
+            String email = request.getParameter(EMAIL_ID_PARAM);
+            String userName = request.getParameter(USERNAME_ID_PARAM);
+
+            FreeCourses logic = new FreeCourses();
+
+            HttpSession session = request.getSession(true);
+
+            if (Objects.isNull(session.getAttribute("user"))) {
+                String password = logic.signUp(identification, lastName1, lastName2, name, telephoneNumber, email, userName);
+                request.setAttribute("message", String.format("Registro con exito, su clave es: %s", password));
+                request.getRequestDispatcher("signin.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("index.jsp");
+            }
 
         } catch (Exception ex) {
-            request.setAttribute("message", ex.toString());
+            request.setAttribute("message", "Usuario o contraseña no validos");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
     }
@@ -83,5 +91,5 @@ public class SignUpService extends HttpServlet {
     private static final String TELEPHONENUMBER_ID_PARAM = "telephoneNumber";
     private static final String EMAIL_ID_PARAM = "email";
     private static final String USERNAME_ID_PARAM = "userName";
-    
+
 }

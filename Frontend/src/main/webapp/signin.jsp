@@ -25,10 +25,10 @@
                     </nav>
                     <form action="SignInService" method="POST">
                         <div>
-                            <input class="input" type="number" name="identification" placeholder="Identificación" title="Debe ingresar el formato: XXXXXXXXX" required="required">
+                            <input class="input" type="number" name="identification" placeholder="Identificación" title="Debe ingresar el formato: XXXXXXXXX" required>
                         </div>
                         <div>
-                            <input class="input" type="password" name="password" placeholder="Contraseña"  required="required">
+                            <input class="input" type="password" name="password" placeholder="Contraseña"  required>
                         </div>  
                         <button class="button" type="submit">Iniciar sesión</button>
                     </form>

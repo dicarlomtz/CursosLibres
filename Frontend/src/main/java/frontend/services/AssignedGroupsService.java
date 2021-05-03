@@ -1,6 +1,7 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +11,26 @@ import model.beans.GenericUser;
 
 @WebServlet(name = "AssignedGroupsService", urlPatterns = {"/AssignedGroupsService"})
 public class AssignedGroupsService extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try {
             GenericUser user = (GenericUser) request.getSession(true).getAttribute("user");
-            
-            request.getSession().setAttribute("id", user.getId());
-            request.getRequestDispatcher("assignedgroups.jsp").forward(request, response);
+
+            if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 2) {
+
+                request.getSession().setAttribute("id", user.getId());
+                request.getRequestDispatcher("assignedgroups.jsp").forward(request, response);
+
+            } else {
+                response.sendRedirect("index.jsp");
+            }
         } catch (IOException ex) {
             response.sendRedirect("index.jsp");
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
