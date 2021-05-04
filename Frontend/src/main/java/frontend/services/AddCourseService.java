@@ -25,7 +25,7 @@ public class AddCourseService extends HttpServlet {
         try {
             instance.addCourse(new Course(idCourse, description, new SetThematicAreas().retrieve(Integer.parseInt(thematicArea))));
         } catch (Exception ex) {
-           
+            
         }
 
         response.sendRedirect("listcourses.jsp");

@@ -40,11 +40,11 @@ public class FreeCourses {
         GenericUser user = null;
         try {
             user = new StudentDAO().retrieve(indentification);
-        } catch (Exception ex) {
+        } catch (IllegalArgumentException ex) {
 
             try {
                 user = new ProfessorDAO().retrieve(indentification);
-            } catch (Exception ex1) {
+            } catch (IllegalArgumentException ex1) {
                 user = new AdministratorDAO().retrieve(indentification);
             }
         }

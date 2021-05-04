@@ -30,7 +30,7 @@
                 <div class="max-width">
                     <div class="box" style="display: -webkit-inline-box;">
                     ${project:userInfo(user)} 
-                    <form action="AssignedGroupsService" method="GET">
+                    <form action="AssignedGroupsService" method="POST">
                         <input class="btn-normal" type="submit" value="Ver grupos asignados" />
                     </form>
                      </div>

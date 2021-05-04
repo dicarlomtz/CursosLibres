@@ -19,7 +19,7 @@
                 <ul>  
 
                     <li>      
-                        <form action="index.jsp">
+                        <form action="GoIndex">
                             <button >Página principal</button>  
                         </form>
                     </li>
@@ -48,7 +48,7 @@
                     </tbody>
                     <tfoot></tfoot>
                 </table>
-                <form style="margin-top: 25px;" action="GenerateConstancyService">
+                <form style="margin-top: 25px;" action="GenerateConstancyService" method="POST">
                     <button class="btn-normal" name="idStudent" value="${id}" >Generar constancia</button>
                 </form>
             </div> 

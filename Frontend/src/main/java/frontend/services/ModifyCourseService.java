@@ -18,8 +18,10 @@ public class ModifyCourseService extends HttpServlet {
                 String idCourseM = request.getParameter("idCourseM");
                 request.setAttribute("idCourseM", idCourseM);
                 request.getRequestDispatcher("coursemodify.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("listcourses.jsp");
             }
-            response.sendRedirect("listcourses.jsp");
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

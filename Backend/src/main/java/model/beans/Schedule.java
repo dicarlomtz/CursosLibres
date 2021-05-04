@@ -77,7 +77,7 @@ public class Schedule implements Serializable {
         r.append(String.format("\t\t\t\t<td>%d</td>\n", this.getGroup().getGroupNumber()));
         r.append(String.format("\t\t\t\t<td>%s</td>\n", this.getDay()));
         r.append(String.format("\t\t\t\t<td>%s</td>\n", this.getHour()));
-        r.append(String.format("\t\t\t\t<td><form action=\"EnrollGroupStudentService\"><button name=\"groupNumber\" class=\"bn-table\" value=\"%d\">%s</button></form></td>\n", getGroup().getGroupNumber(), "Matricular"));
+        r.append(String.format("\t\t\t\t<td><form action=\"EnrollGroupStudentService\" method=\"POST\"><button name=\"groupNumber\" class=\"bn-table\" value=\"%d\">%s</button></form></td>\n", getGroup().getGroupNumber(), "Matricular"));
         r.append("\t\t\t</tr>\n");
         
         return r.toString();

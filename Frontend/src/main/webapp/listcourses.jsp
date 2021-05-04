@@ -13,21 +13,23 @@
     <body>
         <jsp:useBean id="searchParameter" class="model.beans.SearchFilter" scope="request">
         </jsp:useBean>
-         <nav class="navbar">
+        <nav class="navbar">
 
             <div class="brand-title">CursosLibres.com</div>
 
             <div class="navbar-links">
                 <ul>
-            <form action="FilterAllCoursesAdminService" method="GET">
-                <input class="nav-buscar" placeholder="Escriba aquí para buscar..." required="required"/>
-                <button type="submit">Buscar</button>
-            </form>
-            <%
-                try {
+                    <li>
+                        <form action="FilterAllCoursesAdminService" method="GET">
+                            <input class="nav-buscar" placeholder="Escriba aquí para buscar..." required/>
+                            <button type="submit">Buscar</button>
+                        </form>
+                    </li>
+                    <%
+                        try {
 
-                    GenericUser user = (GenericUser) request.getSession(false).getAttribute("user");
-                    String name = user.getLastName1() + " " + user.getLastName2() + ", " + user.getName();
+                            GenericUser user = (GenericUser) request.getSession(false).getAttribute("user");
+                            String name = user.getLastName1() + " " + user.getLastName2() + ", " + user.getName();
 
                             out.print("<li>");
                             out.print("<form action=\"PanelService\">");
@@ -45,7 +47,7 @@
                 </ul>
             </div>
         </nav>
-        
+
         <div class="home">
             <div class="max-width">
                 <div class="box">
@@ -53,7 +55,7 @@
                         Lista de cursos:
                     </h2>
 
-                    <div id="">
+                    <div>
                         <p style="font-style: italic;">Buscando por: <strong>${searchParameter}</strong></p>
                         <table class="table">
                             <thead>

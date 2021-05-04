@@ -16,9 +16,11 @@
 
             <div class="navbar-links">
                 <ul>
-                    <form action="listcourses.jsp">
-                        <button class="button">Ver lista de cursos</button>
-                    </form>
+                    <li>
+                        <form action="listcourses.jsp">
+                            <button class="button">Ver lista de cursos</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -31,7 +33,7 @@
                         Agregar Curso:
                     </h2>
                     <div>
-                        <form action="AddCourseService" method="GET">
+                        <form action="AddCourseService" method="POST">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -43,8 +45,8 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><input class="input-form" style="height: 25px" name="idCourse"/></td>
-                                        <td><input class="input-form" style="height: 25px" name="description"/></td>
+                                        <td><input class="input-form" style="height: 25px" type="number" placeholder="Identificación" min="1" title="Solo puede ingresar números mayores a 1" name="idCourse" required/></td>
+                                        <td><input class="input-form" style="height: 25px" type="text" placeholder="Descripción" title="Debe completar los espacios" name="description" required/></td>
                                         <td><select name="thematicArea">${project:thematicAreas()}</select></td>
                                         <td><button class= "bn-table">Agregar curso</button></td>
                                     </tr>

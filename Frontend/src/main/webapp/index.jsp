@@ -20,10 +20,13 @@
 
             <div class="navbar-links">
                 <ul>
-                    <form action="FilterAllCoursesService" method="GET" ">
-                        <input class="nav-buscar" name="parameter"  placeholder="Escriba aquí para buscar..." required="required"/>
-                        <button type="submit">Buscar</button>
-                    </form>
+                    <li>
+                        <form action="FilterAllCoursesService" method="POST">
+                            <input class="nav-buscar" name="parameter"  placeholder="Escriba aquí para buscar..." required/>
+                            <button type="submit">Buscar</button>
+
+                        </form>
+                    </li>
                     <%
                         try {
                             HttpServletRequest r = request;
@@ -56,7 +59,7 @@
                         Lista de cursos:
                     </h2>
 
-                    <div id="">
+                    <div>
 
                         <p style="font-style: italic;"> Buscando por:<strong>${searchParameter}</strong></p>
 

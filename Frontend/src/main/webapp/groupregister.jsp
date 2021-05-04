@@ -32,7 +32,7 @@
                         
                         <h1>REGISTRAR GRUPO</h1>
                         
-                        <form action="RegisterGroupService" method="GET">
+                        <form action="RegisterGroupService" method="POST">
                             <input type="hidden" name="idCourse" value="${idCourse}"/>
                         <label for="professor">Seleccione un profesor:&nbsp;</label>
                         <select name="professor">
@@ -40,7 +40,7 @@
                         </select>
 
                         <h2>Hora</h2>
-                        <input type="radio" id="7" name="hour" value="7">
+                        <input type="radio" id="7" name="hour" value="7" checked>
                         <label for="7">7:00 AM</label><br>
                         <input type="radio" id="8" name="hour" value="8">
                         <label for="8">8:00 AM</label><br>
@@ -62,7 +62,7 @@
                         <label for="17">17:00 PM</label><br>
 
                         <h2>Dia</h2>      
-                        <input type="radio" id="1" name="day" value="1">
+                        <input type="radio" id="1" name="day" value="1" checked>
                         <label for="1">Lunes</label><br>
                         <input type="radio" id="2" name="day" value="2">
                         <label for="2">Martes</label><br>
@@ -73,7 +73,7 @@
                         <input type="radio" id="5" name="day" value="5">
                         <label for="5">Viernes</label><br>
 
-                        <input class="input-form" type="number" name="groupNumber" placeholder="Numero de grupo" title="Debe ingresar número de grupo" required="required">
+                        <input class="input-form" type="number" name="groupNumber" min="1" placeholder="Numero de grupo, minimo 1" title="Debe ingresar número de grupo" required>
 
                         <button class="btn-normal">Registrar</button>
 

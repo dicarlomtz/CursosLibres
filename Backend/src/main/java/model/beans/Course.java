@@ -52,7 +52,7 @@ public class Course implements Serializable {
         r.append(String.format("\t\t\t\t<td>%d</td>\n", this.getId()));
         r.append(String.format("\t\t\t\t<td>%s</td>\n", this.getDescription()));
         r.append(String.format("\t\t\t\t<td>%s</td>\n", this.getThematicArea().getDescription()));
-        r.append(String.format("\t\t\t\t<td><form action=\"SchedulesService\"><button class=\"bn-table\" name=\"courseSchedules\" value=\"%d\">%s</button></form></td>\n", this.getId(), "Ver horario"));
+        r.append(String.format("\t\t\t\t<td><form action=\"SchedulesService\" method=\"POST\"><button class=\"bn-table\" name=\"courseSchedules\" value=\"%d\">%s</button></form></td>\n", this.getId(), "Ver horario"));
         r.append("\t\t\t</tr>\n");
         
         return r.toString();
@@ -69,9 +69,9 @@ public class Course implements Serializable {
         r.append(String.format("\t\t\t\t<td>%d</td>\n", this.getId()));
         r.append(String.format("\t\t\t\t<td>%s</td>\n", this.getDescription()));
         r.append(String.format("\t\t\t\t<td>%s</td>\n", this.getThematicArea().getDescription()));
-        r.append(String.format("\t\t\t\t<td><form action=\"SchedulesAdminService\"><button class=\"bn-table\" name=\"courseSchedules\" value=\"%s\">%s</button></form></td>\n", this.getId(), "Ver horario"));
+        r.append(String.format("\t\t\t\t<td><form action=\"SchedulesAdminService\" method=\"POST\"><button class=\"bn-table\" name=\"courseSchedules\" value=\"%s\">%s</button></form></td>\n", this.getId(), "Ver horario"));
         r.append(String.format("\t\t\t\t<td><form action=\"CourseGroupRegisterService\" method=\"POST\"><button class=\"bn-table\" name=\"idCourse\" value=\"%d\">%s</button></form></td>", this.getId(), "Abrir grupos"));
-        r.append(String.format("\t\t\t\t<td><form action=\"ModifyCourseService\" method=\"GET\"><button class=\"bn-table\" name=\"idCourseM\" value=\"%d\">%s</button></form></td>", this.getId(), "Modificar"));
+        r.append(String.format("\t\t\t\t<td><form action=\"ModifyCourseService\" method=\"POST\"><button class=\"bn-table\" name=\"idCourseM\" value=\"%d\">%s</button></form></td>", this.getId(), "Modificar"));
         r.append("\t\t\t</tr>\n");
         
         return r.toString();

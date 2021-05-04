@@ -33,7 +33,7 @@
                         Lista de cursos:
                     </h2>
 
-                    <div id="">
+                    <div>
 
                         <p style="font-style: italic;"> Buscando por:<strong>${searchParameter}</strong></p>
 

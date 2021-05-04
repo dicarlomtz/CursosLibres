@@ -12,24 +12,24 @@
         <jsp:useBean id="group" class="model.beans.CourseGroup" scope="request"></jsp:useBean>
             <nav class="navbar">
 
-            <div class="brand-title">CursosLibres.com</div>
+                <div class="brand-title">CursosLibres.com</div>
 
-            <div class="navbar-links">
-                <ul>  
+                <div class="navbar-links">
+                    <ul>  
 
-                    <li>      
-                        <form action="index.jsp">
-                            <button >Página principal</button>  
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-            
-            
-         <div class="home">
-            <div class="max-width">
-                <div class="box">
+                        <li>      
+                            <form action="index.jsp">
+                                <button >Página principal</button>  
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+
+            <div class="home">
+                <div class="max-width">
+                    <div class="box">
                         <form action="AssignGradesService" method="GET">
                             <table class="table">
                                 <thead>
@@ -47,9 +47,9 @@
                             </tfoot>
 
                         </table>
-                            <section style="margin-top: 25px">
-                            <input class="btn-normal" type="submit" value="Asignar notas">
-                        </section>
+
+                        <input class="btn-normal" type="submit" value="Asignar notas">
+
                     </form>
                 </div> 
             </div>
