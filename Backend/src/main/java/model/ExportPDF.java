@@ -3,6 +3,7 @@ package model;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import java.io.*;
+import java.sql.SQLException;
 import model.beans.SetEnrollments;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class ExportPDF
         return instance;
     }
     
-    public void generatePDF(int id) throws Exception
+    public void generatePDF(int id) throws IOException, SQLException 
     {
         Document documento = new Document();
         SetEnrollments enroll = new SetEnrollments();

@@ -1,6 +1,7 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,17 +21,18 @@ public class EnrollGroupStudentService extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         GenericUser user = (GenericUser) session.getAttribute("user");
-        if (!Objects.isNull(user)) {
+        if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
             int groupNumber = Integer.parseInt(request.getParameter("groupNumber"));
             FreeCourses logic = new FreeCourses();
             try {
                 logic.enrollCourseStudent(groupNumber, user.getId());
-            } catch (Exception ex) {
                 response.sendRedirect("studentpanel.jsp");
+            } catch (IOException | SQLException ex) {
+                request.setAttribute("message", "No es posible acceder a la información");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
             response.sendRedirect("studentpanel.jsp");
         } else {
-
             request.setAttribute("message", "Primero debe registrarse");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }

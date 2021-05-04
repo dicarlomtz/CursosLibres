@@ -1,12 +1,16 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.ExportPDF;
+import model.beans.GenericUser;
 
 @WebServlet(name = "GenerateConstancyService", urlPatterns = {"/GenerateConstancyService"})
 public class GenerateConstancyService extends HttpServlet {
@@ -15,14 +19,21 @@ public class GenerateConstancyService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int idStudent = Integer.parseInt(request.getParameter("idStudent"));
-        try {
-            ExportPDF.getInstance().generatePDF(idStudent);
-        } catch (Exception ex) {
-
+        HttpSession session = request.getSession(true);
+        GenericUser user = (GenericUser) session.getAttribute("user");
+        if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 3) {
+            int idStudent = Integer.parseInt(request.getParameter("idStudent"));
+            try {
+                ExportPDF.getInstance().generatePDF(idStudent);
+                 response.sendRedirect("studentpanel.jsp");
+            } catch (IOException | SQLException ex) {
+              request.setAttribute("message", "No es posible completar la operación");
+              request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
+           
+        } else {
+            response.sendRedirect("index.jsp");
         }
-
-        response.sendRedirect("studentpanel.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

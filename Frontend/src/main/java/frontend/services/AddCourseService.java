@@ -1,13 +1,16 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.FreeCourses;
 import model.beans.Course;
+import model.beans.GenericUser;
 import model.beans.SetThematicAreas;
 
 @WebServlet(name = "AddCourseService", urlPatterns = {"/AddCourseService"})
@@ -17,18 +20,25 @@ public class AddCourseService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int idCourse = Integer.parseInt(request.getParameter("idCourse"));
-        String description = request.getParameter("description");
-        String thematicArea = request.getParameter("thematicArea");
+        HttpSession session = request.getSession(true);
+        GenericUser user = (GenericUser) session.getAttribute("user");
+        if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
+            int idCourse = Integer.parseInt(request.getParameter("idCourse"));
+            String description = request.getParameter("description");
+            String thematicArea = request.getParameter("thematicArea");
 
-        FreeCourses instance = new FreeCourses();
-        try {
-            instance.addCourse(new Course(idCourse, description, new SetThematicAreas().retrieve(Integer.parseInt(thematicArea))));
-        } catch (Exception ex) {
-            
+            FreeCourses instance = new FreeCourses();
+            try {
+                instance.addCourse(new Course(idCourse, description, new SetThematicAreas().retrieve(Integer.parseInt(thematicArea))));
+            } catch (Exception ex) {
+
+                request.setAttribute("message", "No es posible usar el número de grupo o la información no es accesible");
+                request.getRequestDispatcher("signup.jsp").forward(request, response);
+            }
+
+        } else {
+            response.sendRedirect("index.jsp");
         }
-
-        response.sendRedirect("listcourses.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

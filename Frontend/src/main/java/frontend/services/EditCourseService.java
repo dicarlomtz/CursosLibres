@@ -1,32 +1,47 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.beans.Course;
+import model.beans.GenericUser;
 import model.beans.SetCourses;
 import model.beans.SetThematicAreas;
 
 @WebServlet(name = "EditCourseService", urlPatterns = {"/EditCourseService"})
 public class EditCourseService extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        int idCourseM = Integer.parseInt(request.getParameter("idCourseM"));
-        String description = request.getParameter("courseDescription");
-        int thematicArea = Integer.parseInt(request.getParameter("thematicArea"));
-
-        try {
-            new SetCourses().update(new Course(idCourseM, description, new SetThematicAreas().retrieve(thematicArea)));
-        } catch (Exception ex) {
-
+        
+        HttpSession session = request.getSession(true);
+        GenericUser user = (GenericUser) session.getAttribute("user");
+        if (!Objects.isNull(user)) {
+            
+            try {
+                int idCourseM = Integer.parseInt(request.getParameter("idCourseM"));
+                String description = request.getParameter("courseDescription");
+                int thematicArea = Integer.parseInt(request.getParameter("thematicArea"));
+                
+                new SetCourses().update(new Course(idCourseM, description, new SetThematicAreas().retrieve(thematicArea)));
+                response.sendRedirect("listcourses.jsp");
+            } catch (IOException | SQLException ex) {
+                request.setAttribute("error.jsp", "No es posible acceder a la información");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            } catch (NumberFormatException ex1) {
+                response.sendRedirect("index.jsp");
+            }
+        } else {
+            request.setAttribute("message", "Primero debe registrarse");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
-        response.sendRedirect("listcourses.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

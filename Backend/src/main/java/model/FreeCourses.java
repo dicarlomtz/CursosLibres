@@ -136,7 +136,7 @@ public class FreeCourses {
         return new SetSchedules().getTableSchedules(courseId);
     }
 
-    public void enrollCourseStudent(int groupNumber, int id) throws Exception {
+    public void enrollCourseStudent(int groupNumber, int id) throws IOException, SQLException {
         CourseGroup cg = new SetCourseGroups().retrieve(groupNumber);
         new SetEnrollments().add(new Enrollment(new StudentDAO().retrieve(id), cg, cg.getCourse(), new ConditionDAO().retrieve(4), 0));
     }
