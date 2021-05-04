@@ -30,13 +30,11 @@
             <div class="max-width">
                 <div class="box">
                     <h2>
-                        Lista de cursos:
+                        Lista de profesores:
                     </h2>
 
                     <div>
-
-                        <p style="font-style: italic;"> Buscando por:<strong>${searchParameter}</strong></p>
-
+                        <br />
                         <table class="table">
                             <thead>
                                 <tr>

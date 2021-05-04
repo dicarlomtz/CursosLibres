@@ -90,9 +90,9 @@ public class GenericUser implements Serializable {
         StringBuilder r = new StringBuilder();
 
         r.append("<h2>Datos de usuario</h2>\n");
-        r.append(String.format("<span><p>Identificación:%d</p></span>", getId()));
-        r.append(String.format("<span><p>Nombre:%s %s %s</p></span>", getName(), getLastName1(), getLastName2()));
-        r.append(String.format("<span><p>E-mail:%s</p></span>", getEmail()));
+        r.append(String.format("<span><p>Identificación: %d</p></span>", getId()));
+        r.append(String.format("<span><p>Nombre: %s %s %s</p></span>", getName(), getLastName1(), getLastName2()));
+        r.append(String.format("<span><p>E-mail: %s</p></span>", getEmail()));
         r.append(String.format("<span><p>Teléfono: %d</p></span>", getTelephoneNumber()));
 
         return r.toString();
