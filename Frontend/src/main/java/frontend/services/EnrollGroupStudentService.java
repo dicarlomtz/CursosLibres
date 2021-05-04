@@ -33,7 +33,6 @@ public class EnrollGroupStudentService extends HttpServlet {
             }
             response.sendRedirect("studentpanel.jsp");
         } else {
-
             request.setAttribute("message", "Primero debe registrarse");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }

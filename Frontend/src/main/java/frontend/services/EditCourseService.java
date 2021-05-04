@@ -1,12 +1,15 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.beans.Course;
+import model.beans.GenericUser;
 import model.beans.SetCourses;
 import model.beans.SetThematicAreas;
 
@@ -17,16 +20,23 @@ public class EditCourseService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int idCourseM = Integer.parseInt(request.getParameter("idCourseM"));
-        String description = request.getParameter("courseDescription");
-        int thematicArea = Integer.parseInt(request.getParameter("thematicArea"));
+        HttpSession session = request.getSession(true);
+        GenericUser user = (GenericUser) session.getAttribute("user");
+        if (!Objects.isNull(user)) {
+            int idCourseM = Integer.parseInt(request.getParameter("idCourseM"));
+            String description = request.getParameter("courseDescription");
+            int thematicArea = Integer.parseInt(request.getParameter("thematicArea"));
 
-        try {
-            new SetCourses().update(new Course(idCourseM, description, new SetThematicAreas().retrieve(thematicArea)));
-        } catch (Exception ex) {
+            try {
+                new SetCourses().update(new Course(idCourseM, description, new SetThematicAreas().retrieve(thematicArea)));
+            } catch (Exception ex) {
 
+            }
+            response.sendRedirect("listcourses.jsp");
+        } else {
+            request.setAttribute("message", "Primero debe registrarse");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
-        response.sendRedirect("listcourses.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
