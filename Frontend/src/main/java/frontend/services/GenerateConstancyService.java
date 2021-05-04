@@ -25,7 +25,7 @@ public class GenerateConstancyService extends HttpServlet {
             int idStudent = Integer.parseInt(request.getParameter("idStudent"));
             try {
                 ExportPDF.getInstance().generatePDF(idStudent);
-                 response.sendRedirect("studentpanel.jsp");
+                response.sendRedirect("studentpanel.jsp");
             } catch (IOException | SQLException ex) {
               request.setAttribute("message", "No es posible completar la operación");
               request.getRequestDispatcher("error.jsp").forward(request, response);

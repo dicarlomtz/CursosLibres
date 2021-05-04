@@ -30,6 +30,7 @@ public class AddCourseService extends HttpServlet {
             FreeCourses instance = new FreeCourses();
             try {
                 instance.addCourse(new Course(idCourse, description, new SetThematicAreas().retrieve(Integer.parseInt(thematicArea))));
+                response.sendRedirect("listcourses.jsp");
             } catch (Exception ex) {
 
                 request.setAttribute("message", "No es posible usar el número de grupo o la información no es accesible");
