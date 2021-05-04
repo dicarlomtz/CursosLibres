@@ -1,6 +1,7 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,14 +32,17 @@ public class AddCourseService extends HttpServlet {
             try {
                 instance.addCourse(new Course(idCourse, description, new SetThematicAreas().retrieve(Integer.parseInt(thematicArea))));
                 response.sendRedirect("listcourses.jsp");
-            } catch (Exception ex) {
-
-                request.setAttribute("message", "No es posible usar el número de grupo o la información no es accesible");
-                request.getRequestDispatcher("signup.jsp").forward(request, response);
+            } catch (IOException ex) {
+                request.setAttribute("message", "Número de grupo no disponible");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            } catch (SQLException | NumberFormatException ex1) {
+                request.setAttribute("message", "No es posible acceder a la información");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
 
         } else {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

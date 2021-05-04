@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,15 +34,14 @@ public class AssignGradesService extends HttpServlet {
                     int grade = Integer.parseInt(request.getParameter(identifier));
                     logic.assignNote(identifier, grade);
                     response.sendRedirect("professorpanel.jsp");
-                } catch (NumberFormatException e) {
-                    response.sendRedirect("index.jsp");
-                } catch (SQLException | IOException ex) {
+                } catch (SQLException | NumberFormatException | IOException ex) {
                     request.setAttribute("message", "No es posible accesar a la información");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
             }
         } else {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible accesar a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
 
     }

@@ -59,5 +59,5 @@ public class FilterAllCoursesService extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static String PARAMETER_ID_PARAM = "parameter";
+    private static final String PARAMETER_ID_PARAM = "parameter";
 }

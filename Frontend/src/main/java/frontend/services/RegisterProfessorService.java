@@ -26,21 +26,22 @@ public class RegisterProfessorService extends HttpServlet {
 
         try {
 
-            Enumeration<String> parameters = request.getParameterNames();
-            int identification = Integer.parseInt(request.getParameter(parameters.nextElement()));
-            String lastName1 = request.getParameter(parameters.nextElement());
-            String lastName2 = request.getParameter(parameters.nextElement());
-            String name = request.getParameter(parameters.nextElement());
-            int telephoneNumber = Integer.parseInt(request.getParameter(parameters.nextElement()));
-            String email = request.getParameter(parameters.nextElement());
-            String userName = request.getParameter(parameters.nextElement());
-
             FreeCourses logic = new FreeCourses();
 
             HttpSession session = request.getSession(true);
             GenericUser user = (GenericUser) session.getAttribute("user");
 
             if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
+
+                Enumeration<String> parameters = request.getParameterNames();
+                int identification = Integer.parseInt(request.getParameter(parameters.nextElement()));
+                String lastName1 = request.getParameter(parameters.nextElement());
+                String lastName2 = request.getParameter(parameters.nextElement());
+                String name = request.getParameter(parameters.nextElement());
+                int telephoneNumber = Integer.parseInt(request.getParameter(parameters.nextElement()));
+                String email = request.getParameter(parameters.nextElement());
+                String userName = request.getParameter(parameters.nextElement());
+
                 if (parameters.hasMoreElements()) {
                     String password = logic.signUpProfessor(identification, lastName1, lastName2, name, telephoneNumber, email, userName);
                     SetSpecialities ss = new SetSpecialities();
@@ -54,14 +55,16 @@ public class RegisterProfessorService extends HttpServlet {
                     request.getRequestDispatcher("professorregister.jso").forward(request, response);
                 }
             } else {
-                response.sendRedirect("index.jsp");
+                request.setAttribute("message", "No es posible acceder a la información");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
 
-        }  catch (IOException | SQLException ex) {
-            request.setAttribute("message", "Usuario o identificación invalidos");
+        } catch (IOException ex) {
+            request.setAttribute("message", "Usuario previamente registrado");
             request.getRequestDispatcher("professorregister.jsp").forward(request, response);
-        } catch(NumberFormatException ex1) {
-            response.sendRedirect("index.jsp");
+        } catch (NumberFormatException | SQLException ex1) {
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

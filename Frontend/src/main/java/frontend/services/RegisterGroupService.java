@@ -14,37 +14,36 @@ import model.beans.GenericUser;
 
 @WebServlet(name = "RegisterGroupService", urlPatterns = {"/RegisterGroupService"})
 public class RegisterGroupService extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try {
-            
-            int idProfessor = Integer.parseInt(request.getParameter(PROFESOR_ID_PARAM));
-            int idCourse = Integer.parseInt(request.getParameter(COURSE_ID_PARAM));
-            int day = Integer.parseInt(request.getParameter(DAY_ID_PARAM));
-            int hour = Integer.parseInt(request.getParameter(HOUR_ID_PARAM));
-            int groupNumber = Integer.parseInt(request.getParameter(GROUP_NUMBER_ID_PARAM));
-            
+
             HttpSession session = request.getSession(true);
             GenericUser user = (GenericUser) session.getAttribute("user");
-            
+
             if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
-                
+
+                int idProfessor = Integer.parseInt(request.getParameter(PROFESOR_ID_PARAM));
+                int idCourse = Integer.parseInt(request.getParameter(COURSE_ID_PARAM));
+                int day = Integer.parseInt(request.getParameter(DAY_ID_PARAM));
+                int hour = Integer.parseInt(request.getParameter(HOUR_ID_PARAM));
+                int groupNumber = Integer.parseInt(request.getParameter(GROUP_NUMBER_ID_PARAM));
+
                 new FreeCourses().registerGroup(idCourse, groupNumber, idProfessor, day, hour);
-                response.sendRedirect("adminpanel.jsp");
-                
+                response.sendRedirect("listcourses.jsp");
+
             } else {
-                response.sendRedirect("index.jsp");
+                request.setAttribute("message", "No es posible acceder a la información");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
-        } catch (IOException | SQLException ex) {
+        } catch (IOException | SQLException | NumberFormatException ex) {
             request.setAttribute("message", "No es posible acceder a la información");
             request.getRequestDispatcher("error.jsp").forward(request, response);
-        } catch (NumberFormatException ex) {
-            response.sendRedirect("index.jsp");
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -91,5 +90,5 @@ public class RegisterGroupService extends HttpServlet {
     private static final String DAY_ID_PARAM = "day";
     private static final String HOUR_ID_PARAM = "hour";
     private static final String GROUP_NUMBER_ID_PARAM = "groupNumber";
-    
+
 }

@@ -16,31 +16,29 @@ import model.beans.SetThematicAreas;
 
 @WebServlet(name = "EditCourseService", urlPatterns = {"/EditCourseService"})
 public class EditCourseService extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession session = request.getSession(true);
         GenericUser user = (GenericUser) session.getAttribute("user");
-        if (!Objects.isNull(user)) {
-            
+        if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
+
             try {
                 int idCourseM = Integer.parseInt(request.getParameter("idCourseM"));
                 String description = request.getParameter("courseDescription");
                 int thematicArea = Integer.parseInt(request.getParameter("thematicArea"));
-                
+
                 new SetCourses().update(new Course(idCourseM, description, new SetThematicAreas().retrieve(thematicArea)));
                 response.sendRedirect("listcourses.jsp");
-            } catch (IOException | SQLException ex) {
-                request.setAttribute("error.jsp", "No es posible acceder a la información");
+            } catch (NumberFormatException | IOException | SQLException ex1) {
+                request.setAttribute("message", "No es posible accesar a la información");
                 request.getRequestDispatcher("error.jsp").forward(request, response);
-            } catch (NumberFormatException ex1) {
-                response.sendRedirect("index.jsp");
             }
         } else {
-            request.setAttribute("message", "Primero debe registrarse");
-            request.getRequestDispatcher("signup.jsp").forward(request, response);
+            request.setAttribute("message", "No es posible accesar a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

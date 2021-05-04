@@ -1,7 +1,10 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,13 +37,16 @@ public class SignInService extends HttpServlet {
                 session.setAttribute("user", user);
 
                 session.setAttribute("id", user.getId());
-            }
 
+            }
             response.sendRedirect("index.jsp");
 
-        } catch (Exception ex) {
-            request.setAttribute("message", "Identificación o contraseña incorrectos");
+        } catch (NumberFormatException ex) {
+            request.setAttribute("message", "No es posible acceder a la información");
             request.getRequestDispatcher("signin.jsp").forward(request, response);
+        } catch (Exception ex) {
+            request.setAttribute("message", "No es posible acceder a la información, credenciales pueden ser incorrectas");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
 
     }

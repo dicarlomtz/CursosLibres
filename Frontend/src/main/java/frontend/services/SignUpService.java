@@ -39,6 +39,9 @@ public class SignUpService extends HttpServlet {
                 response.sendRedirect("index.jsp");
             }
 
+        } catch (NumberFormatException ex) {
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         } catch (Exception ex) {
             request.setAttribute("message", "Usuario o identificación no validos");
             request.getRequestDispatcher("signup.jsp").forward(request, response);

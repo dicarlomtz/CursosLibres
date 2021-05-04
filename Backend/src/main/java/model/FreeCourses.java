@@ -40,11 +40,10 @@ public class FreeCourses {
         GenericUser user = null;
         try {
             user = new StudentDAO().retrieve(indentification);
-        } catch (IllegalArgumentException ex) {
-
+        } catch (Exception ex) {
             try {
                 user = new ProfessorDAO().retrieve(indentification);
-            } catch (IllegalArgumentException ex1) {
+            } catch (Exception ex1) {
                 user = new AdministratorDAO().retrieve(indentification);
             }
         }
@@ -85,17 +84,12 @@ public class FreeCourses {
         return password;
     }
 
-    public String getAssignedGroups(int professorId) throws Exception {
+    public String getAssignedGroups(int professorId) throws IOException, SQLException {
         return new SetCourseGroups().getTableProfessorGroups(professorId);
     }
 
-    public static String getAssignedGroupsStatic(GenericUser user) {
-        try {
-            return new FreeCourses().getAssignedGroups(user.getId());
-        } catch (Exception ex) {
-            Logger.getLogger(FreeCourses.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
+    public static String getAssignedGroupsStatic(GenericUser user) throws IOException, SQLException {
+        return new FreeCourses().getAssignedGroups(user.getId());
     }
 
     public void assignNote(String identifier, int grade) throws IOException, SQLException {
@@ -111,27 +105,22 @@ public class FreeCourses {
         new EnrollmentDAO().update(identifier, e);
     }
 
-    public String getGroupEnrollments(int groupNumber) throws Exception {
+    public String getGroupEnrollments(int groupNumber) throws IOException, SQLException {
         return new SetEnrollments().getTableGroupNumber(groupNumber);
     }
 
-    public static String getGroupEnrollmentsStatic(CourseGroup group) {
-        try {
-            return new FreeCourses().getGroupEnrollments(group.getGroupNumber());
-        } catch (Exception ex) {
-            Logger.getLogger(FreeCourses.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
+    public static String getGroupEnrollmentsStatic(CourseGroup group) throws IOException, SQLException {
+        return new FreeCourses().getGroupEnrollments(group.getGroupNumber());
     }
 
-    public String getCourses(String filter) throws Exception {
-       return new SetCourses().getTableCourses(filter);
+    public String getCourses(String filter) throws IOException, IOException {
+        return SetCourses.getTableCourses(filter);
     }
 
     public String getStudentEnrollments(int id) throws Exception {
         return new SetEnrollments().getHTMLStudentEnrollments(id);
     }
-    
+
     public String getCourseSchedules(int courseId) throws Exception {
         return new SetSchedules().getTableSchedules(courseId);
     }
@@ -141,13 +130,9 @@ public class FreeCourses {
         new SetEnrollments().add(new Enrollment(new StudentDAO().retrieve(id), cg, cg.getCourse(), new ConditionDAO().retrieve(4), 0));
     }
 
-    public static String getHTMLAreasFilter(String idCourse) {
-        try {
-            return new SetSpecialities().getOptionsAreas(new CourseDAO().retrieve(Integer.parseInt(idCourse)).getThematicArea().getId());
-        } catch (Exception ex) {
-            Logger.getLogger(FreeCourses.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
+    public static String getHTMLAreasFilter(String idCourse) throws IOException, SQLException {
+        return new SetSpecialities().getOptionsAreas(new CourseDAO().retrieve(Integer.parseInt(idCourse)).getThematicArea().getId());
+
     }
 
     public void registerGroup(int idCourse, int groupNumber, int idProfessor, int day, int hour) throws IOException, SQLException {
@@ -157,12 +142,7 @@ public class FreeCourses {
 
     }
 
-    public void addCourse(Course course) {
-        try {
-            new SetCourses().add(course);
-        } catch (Exception ex) {
-            Logger.getLogger(FreeCourses.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
+    public void addCourse(Course course) throws IOException, SQLException {
+        new SetCourses().add(course);
     }
 }

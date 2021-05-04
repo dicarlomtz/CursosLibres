@@ -17,23 +17,27 @@ public class FilterAllCoursesAdminService extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try {
-            String parameterSearch = request.getParameter(PARAMETER_ID_PARAM);
-            if(Objects.isNull(parameterSearch)){
-                throw new IllegalArgumentException();
-            }
 
             HttpSession session = request.getSession(true);
             GenericUser user = (GenericUser) session.getAttribute("user");
 
             if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
+                
+                String parameterSearch = request.getParameter(PARAMETER_ID_PARAM);
+                if (Objects.isNull(parameterSearch)) {
+                    throw new IllegalArgumentException();
+                }
+                
                 request.setAttribute("searchParameter", new SearchFilter(parameterSearch));
                 request.getRequestDispatcher("listcourses.jsp").forward(request, response);
             } else {
-                response.sendRedirect("index.jsp");
+                request.setAttribute("message", "No es posible acceder a la información");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
 
         } catch (IllegalArgumentException ex) {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

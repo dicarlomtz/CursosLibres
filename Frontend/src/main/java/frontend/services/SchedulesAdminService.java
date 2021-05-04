@@ -1,12 +1,14 @@
 package frontend.services;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.FreeCourses;
+import javax.servlet.http.HttpSession;
+import model.beans.GenericUser;
 
 @WebServlet(name = "SchedulesAdminService", urlPatterns = {"/SchedulesAdminService"})
 public class SchedulesAdminService extends HttpServlet {
@@ -15,18 +17,19 @@ public class SchedulesAdminService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        if (request.getParameter("courseSchedules") != null) {
+        HttpSession session = request.getSession(true);
+        GenericUser user = (GenericUser) session.getAttribute("user");
+        if (request.getParameter("courseSchedules") != null
+                && !Objects.isNull(user)
+                && user.getAccData().getRol().getId() == 1) {
+
             String idCourse = request.getParameter("courseSchedules");
-            FreeCourses logic = new FreeCourses();
-           
-            try {
-                
-                request.setAttribute("idCourse", idCourse);
-                request.getRequestDispatcher("coursedetailsadmin.jsp").forward(request, response);
-            } catch (Exception ex) {
-            }
+
+            request.setAttribute("idCourse", idCourse);
+            request.getRequestDispatcher("coursedetailsadmin.jsp").forward(request, response);
         } else {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

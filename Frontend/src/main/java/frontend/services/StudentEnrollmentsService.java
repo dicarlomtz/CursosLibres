@@ -17,13 +17,14 @@ public class StudentEnrollmentsService extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         GenericUser user = (GenericUser) session.getAttribute("user");
-        
-        if(!Objects.isNull(user) && user.getAccData().getRol().getId() == 3){
 
-        request.getSession().setAttribute("id", String.valueOf(user.getId()));
-        request.getRequestDispatcher("student-enrollments.jsp").forward(request, response);
+        if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 3) {
+
+            request.getSession().setAttribute("id", String.valueOf(user.getId()));
+            request.getRequestDispatcher("student-enrollments.jsp").forward(request, response);
         } else {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
 
     }

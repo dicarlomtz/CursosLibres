@@ -73,7 +73,7 @@
                         <input type="radio" id="5" name="day" value="5">
                         <label for="5">Viernes</label><br>
 
-                        <input class="input-form" type="number" name="groupNumber" min="1" placeholder="Numero de grupo, minimo 1" title="Debe ingresar número de grupo" required>
+                        <input class="input-form" type="number" name="groupNumber" min="1" placeholder="Numero de grupo" title="Debe ingresar número de grupo, minimo 1" required>
 
                         <button class="btn-normal">Registrar</button>
 

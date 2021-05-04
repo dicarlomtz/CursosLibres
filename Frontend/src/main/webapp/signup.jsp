@@ -4,7 +4,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <link href="styles/default.css" rel="stylesheet" type="text/css"/>
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <title>Registro</title>
     </head>
     <body>

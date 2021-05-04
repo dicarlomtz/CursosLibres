@@ -12,20 +12,20 @@ import model.beans.GenericUser;
 
 @WebServlet(name = "PanelService", urlPatterns = {"/PanelService"})
 public class PanelService extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession session = request.getSession(true);
         GenericUser user = (GenericUser) session.getAttribute("user");
-        
+
         if (!Objects.isNull(user)) {
-            
+
             int idRol = user.getAccData().getRol().getId();
-            
+
             switch (idRol) {
-                case 3:                    
+                case 3:
                     request.getSession().setAttribute("user", user);
                     request.getRequestDispatcher("studentpanel.jsp").forward(request, response);
                     break;
@@ -38,11 +38,13 @@ public class PanelService extends HttpServlet {
                     request.getRequestDispatcher("adminpanel.jsp").forward(request, response);
                     break;
                 default:
-                    response.sendRedirect("index.jsp");
+                    request.setAttribute("message", "No es posible acceder a la información");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
                     break;
             }
         } else {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

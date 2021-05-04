@@ -27,12 +27,13 @@ public class GenerateConstancyService extends HttpServlet {
                 ExportPDF.getInstance().generatePDF(idStudent);
                 response.sendRedirect("studentpanel.jsp");
             } catch (IOException | SQLException ex) {
-              request.setAttribute("message", "No es posible completar la operación");
-              request.getRequestDispatcher("error.jsp").forward(request, response);
+                request.setAttribute("message", "No es posible acceder a la información");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
-           
+
         } else {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

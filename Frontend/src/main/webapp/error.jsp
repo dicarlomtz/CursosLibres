@@ -4,7 +4,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="styles/default.css">
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <title>ERROR</title>
     </head>
     <body>    

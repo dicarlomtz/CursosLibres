@@ -20,25 +20,25 @@ public class EnrolledStudentsService extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try {
-            int idGroup = Integer.parseInt(request.getParameter(SELECTEDGROUP_ID_PARAM));
 
             HttpSession session = request.getSession(true);
             GenericUser user = (GenericUser) session.getAttribute("user");
 
             if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 2) {
 
+                int idGroup = Integer.parseInt(request.getParameter(SELECTEDGROUP_ID_PARAM));
+
                 request.setAttribute("group", new SetCourseGroups().retrieve(idGroup));
                 request.getRequestDispatcher("enrollments.jsp").forward(request, response);
 
             } else {
-                response.sendRedirect("index.jsp");
+                request.setAttribute("message", "No es posible acceder a la información");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
-        } catch (IOException | SQLException ex) {
+        } catch (IOException | SQLException | NumberFormatException ex) {
             request.setAttribute("message", "No es posible acceder a la información");
             request.getRequestDispatcher("error.jsp").forward(request, response);
 
-        } catch (NumberFormatException ex1) {
-            response.sendRedirect("index.jsp");
         }
 
     }

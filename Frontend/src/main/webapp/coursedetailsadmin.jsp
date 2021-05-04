@@ -17,31 +17,30 @@
                 <div class="brand-title">CursosLibres.com</div>
 
                 <div class="navbar-links">
-                    <div class="navbar-links">
-                        <ul>  
-                        <%
-                            try {
+                    <ul>  
+                    <%
+                        try {
 
-                                GenericUser user = (GenericUser) request.getSession(false).getAttribute("user");
-                                String name = user.getLastName1() + " " + user.getLastName2() + ", " + user.getName();
+                            GenericUser user = (GenericUser) request.getSession(false).getAttribute("user");
+                            String name = user.getLastName1() + " " + user.getLastName2() + ", " + user.getName();
 
-                                out.print("<li>");
-                                out.print("<form action=\"PanelService\">");
-                                out.print(String.format("<button >%s</button>", name));
-                                out.print("</form>");
-                                out.print("</li>");
+                            out.print("<li>");
+                            out.print("<form action=\"PanelService\">");
+                            out.print(String.format("<button >%s</button>", name));
+                            out.print("</form>");
+                            out.print("</li>");
 
-                            } catch (Exception e) {
-                                out.print("<li>");
-                                out.print("<form action=\"signup.jsp\">");
-                                out.print("<button >Registrarse</button>");
-                                out.print("</form>");
-                                out.print("</li>");
-                            }
-                        %>
+                        } catch (Exception e) {
+                            out.print("<li>");
+                            out.print("<form action=\"signup.jsp\">");
+                            out.print("<button >Registrarse</button>");
+                            out.print("</form>");
+                            out.print("</li>");
+                        }
+                    %>
 
-                    </ul>
-                </div>
+                </ul>
+            </div>
         </nav>
 
         <div class="home">

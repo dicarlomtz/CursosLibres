@@ -6,7 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.FreeCourses;
 
 @WebServlet(name = "SchedulesService", urlPatterns = {"/SchedulesService"})
 public class SchedulesService extends HttpServlet {
@@ -17,17 +16,13 @@ public class SchedulesService extends HttpServlet {
 
         if (request.getParameter("courseSchedules") != null) {
             String idCourse = request.getParameter("courseSchedules");
-            FreeCourses logic = new FreeCourses();
-           
-            try {
-                
-                request.setAttribute("idCourse", idCourse);
-                request.getRequestDispatcher("coursedetails.jsp").forward(request, response);
-            } catch (Exception ex) {
-            }
+
+            request.setAttribute("idCourse", idCourse);
+            request.getRequestDispatcher("coursedetails.jsp").forward(request, response);
 
         } else {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

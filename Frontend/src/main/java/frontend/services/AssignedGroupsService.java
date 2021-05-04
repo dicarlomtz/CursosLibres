@@ -24,7 +24,8 @@ public class AssignedGroupsService extends HttpServlet {
             request.getRequestDispatcher("assignedgroups.jsp").forward(request, response);
 
         } else {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible accesar a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
 
     }

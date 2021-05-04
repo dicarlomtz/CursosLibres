@@ -20,14 +20,15 @@ public class ModifyCourseService extends HttpServlet {
         HttpSession session = request.getSession(true);
         GenericUser user = (GenericUser) session.getAttribute("user");
         if (!Objects.isNull(user) && user.getAccData().getRol().getId() == 1) {
-            
+
             String idCourseM = request.getParameter("idCourseM");
 
             request.setAttribute("idCourseM", idCourseM);
             request.getRequestDispatcher("coursemodify.jsp").forward(request, response);
 
         } else {
-            response.sendRedirect("index.jsp");
+            request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
