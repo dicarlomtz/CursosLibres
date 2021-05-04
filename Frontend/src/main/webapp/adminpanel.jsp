@@ -4,30 +4,40 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="styles/default.css" rel="stylesheet" type="text/css"/>
-        <link href="styles/table.css" rel="stylesheet" type="text/css"/>
+       <link rel="stylesheet" type="text/css" href="styles/default.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <title>Panel de Administrador</title>
     </head>
     <body>
         <jsp:useBean id="user" class="model.beans.GenericUser" scope="session"></jsp:useBean>
-            <header>
-                <h1>
-                    CursosLibres.com
-                </h1>
-                <form action="index.jsp">
-                    <button class="button">Página principal</button>
-                </form>
-            </header>
-            <div id="wrapper">
-                <div id="contents">
-                ${project:userInfo(user)}
-                <nav>
-                    <a class="button" href = "professors.jsp">Professors</a>
-                </nav>
-                <nav>
-                    <a class="button" href = "listcourses.jsp">Lista de cursos</a>
-                </nav>
+           <nav class="navbar">
+
+            <div class="brand-title">CursosLibres.com</div>
+
+            <div class="navbar-links">
+                <ul>  
+
+                    <li>      
+                        <form action="index.jsp">
+                            <button >Página principal</button>  
+                        </form>
+                    </li>
+                </ul>
             </div>
+        </nav>
+            
+            <div class="home">
+            <div class="max-width">
+                <div class="box" style="display: -webkit-inline-box;">
+                ${project:userInfo(user)}
+                    <nav>
+                        <a class="btn-normal" href = "professors.jsp">Profesores</a>
+                    </nav>
+                    <nav>
+                        <a class="btn-normal" href = "listcourses.jsp">Lista de cursos</a>
+                    </nav>
+            </div>
+        </div>
         </div>
         <footer>
             <p>

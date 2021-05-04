@@ -4,23 +4,30 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="styles/default.css" rel="stylesheet" type="text/css"/>
-        <link href="styles/table.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="styles/default.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <title>Grupos asignados</title>
     </head>
     <body>
         <jsp:useBean id="user" class="model.beans.GenericUser" scope="session"></jsp:useBean>
-            <div>
-                <header>
-                    <h1>
-                        CursosLibres.com
-                    </h1>
-                    <form action="index.jsp">
-                        <button class="button">Página principal</button>
-                    </form>
-                </header>
-                <div>
-                    <div>
+            <nav class="navbar">
+
+                <div class="brand-title">CursosLibres.com</div>
+
+                <div class="navbar-links">
+                    <ul>  
+
+                        <li>      
+                            <form action="index.jsp">
+                                <button >Página principal</button>  
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <<div class="home">
+                <div class="max-width">
+                    <div class="box" >
                         <table class="table">
                             <thead>
                                 <tr>
@@ -38,7 +45,11 @@
                     </table>
                 </div>
             </div>
-            <footer></footer>
         </div>
+        <footer>
+            <p>
+                Todos los derechos reservados &copy; 2021
+            </p>
+        </footer>
     </body>
 </html>

@@ -10,34 +10,42 @@
     </head>
     <body>
         <jsp:useBean id="idCourseM" class="java.lang.String" scope="request"></jsp:useBean>
-        <header>
-            <h1>
-                CursosLibres.com
-            </h1>
-            <form action="listcourses.jsp">
-                <button class="button">Ver lista de cursos</button>
-            </form>
-        </header>
-        <div id="wrapper">
-            <h2>
-                Modificar Curso:
-            </h2>
-            <div id="contents">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Descripción</th>
-                            <th>Area temática</th>
-                            <th>Guardar cambios</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${project:specificCourse(idCourseM)}
-                    </tbody>
-                    <tfoot></tfoot>
-                </table>
-            </div> 
+            <nav class="navbar">
+
+                <div class="brand-title">CursosLibres.com</div>
+
+                <div class="navbar-links">
+                    <ul>  
+
+                        <li>   
+                            <form action="listcourses.jsp">
+                                <button class="button">Ver lista de cursos</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="home">
+                <div class="max-width">
+                    <div class="box">
+                        <h1>MODIFICAR CURSO</h1>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descripción</th>
+                                    <th>Area temática</th>
+                                    <th>Guardar cambios</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            ${project:specificCourse(idCourseM)}
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div> 
+            </div>
         </div>
         <footer>
             <p>

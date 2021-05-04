@@ -1,3 +1,5 @@
+<%@page import="model.FreeCourses"%>
+<%@page import="model.beans.GenericUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="/WEB-INF/tlds/project.tld" prefix="project"%>
 <!DOCTYPE html>
@@ -10,32 +12,57 @@
     </head>
     <body>
         <jsp:useBean id="idCourse" class="java.lang.String" scope="request"></jsp:useBean>
-        <jsp:useBean id="user" class="model.beans.GenericUser" scope="session"></jsp:useBean>
-        <header>
-            <h1>
-                CursosLibres.com
-            </h1>
-            <form action="PanelService">
-                <button class="button">${project:CompleteName(user)}</button>
-            </form>
-        </header>
-        <div id="wrapper">
-            <h2>
-                Lista de horarios:
-            </h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Número de grupo</th>
-                        <th>Día</th>
-                        <th>Hora</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${project:schedulesAdmin(idCourse)}
-                </tbody>
-                <tfoot></tfoot>
-            </table>
+            <nav class="navbar">
+
+                <div class="brand-title">CursosLibres.com</div>
+
+                <div class="navbar-links">
+                    <div class="navbar-links">
+                        <ul>  
+                        <%
+                            try {
+
+                                GenericUser user = (GenericUser) request.getSession(false).getAttribute("user");
+                                String name = user.getLastName1() + " " + user.getLastName2() + ", " + user.getName();
+
+                                out.print("<li>");
+                                out.print("<form action=\"PanelService\">");
+                                out.print(String.format("<button >%s</button>", name));
+                                out.print("</form>");
+                                out.print("</li>");
+
+                            } catch (Exception e) {
+                                out.print("<li>");
+                                out.print("<form action=\"signup.jsp\">");
+                                out.print("<button >Registrarse</button>");
+                                out.print("</form>");
+                                out.print("</li>");
+                            }
+                        %>
+
+                    </ul>
+                </div>
+        </nav>
+
+        <div class="home">
+            <div class="max-width">
+                <div class="box">
+                    <h1>HORARIOS Y GRUPOS </h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Número de grupo</th>
+                                <th>Día</th>
+                                <th>Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${project:schedulesAdmin(idCourse)}
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div> 
+            </div>
         </div>
         <footer>
             <p>

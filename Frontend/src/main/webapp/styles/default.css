@@ -1,97 +1,218 @@
-body {
-    
-    background-image: url("background.png");
-    background-color: #222629;
-    background-size: cover;
-    font: 12pt sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;    
 }
-
-header
-{
-    border-bottom: solid black;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 8px;
-    margin-top: 25px;
+html{
+    scroll-behavior: smooth;
 }
-
-
-#main-wrapper {
-    padding: 15px;
-    margin: 15px;
+.max-width{
+    max-width: 1300px;
+    padding: 0 80px;
+    margin: auto ;
 }
-
-#main-contents-wrapper {
-
+span{
+    font-size: 1rem;
+    margin: .5rem;
 }
-
-.button {
-    background-color: #86c232;
-    color: white;
-    border: none;
-    font: 12pt sans-serif;
-    font-weight: bold;
-    text-decoration: none;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    padding: 10px 50px;
-}
-
-.button:hover {
-    background-color: #61892f;
-}
-
-.input {
+.navbar {
     width: 100%;
-    padding: 10px;
-    border: none;
-    font: 12pt verdana;
-    background-color: #c2c2c2;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-.table {
-    border: none;
-    border-top: 2px solid #61892f;
-    border-bottom: 2px solid #61892f;
-    border-collapse: collapse;
-    font-size: smaller;
-}
-
-.table th {
-    background-color: #61892f;
-    border: none;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    z-index: 999;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: darkslategray;
     color: white;
 }
+.nav-buscar{
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    outline: none;
+    padding: 0 15px;
+}
+.brand-title{
+    font-size: 1.8rem;
+    margin: .5rem;
+}
+.navbar-links ul form{
+    display: inline-flex;
+}
+.navbar-links ul form button{
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+    display: block;
+    background-color: darkslategray
+}
+.navbar-links ul form input {
+    font-size: 1.5rem;
+    margin: .5rem;
+}
+.navbar-links ul form button:hover{
+    background-color: #555;
+}
+.navbar-links ul{
+    padding: 0;
+    display: inline-flex;
+}
 
-.table th, td {
+.navbar-links li{
+    list-style: none;
+}
+
+.navbar-links li button{
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+    display: block;
+    background-color: darkslategray
+}
+.navbar-links li button:hover{
+    background-color: #555 ;
+}
+button {
+    width: 100%;
+    height: 100%;
+    border: 2px solid darkslategray;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+/*******home*********/
+.home {
+    display: flex;
+    background-image: url("background_1.png") ;
+    height: 100vh;
+    color: white;
+    min-height: 500px;
+    font-family: 'Ubuntu', sans-serif;
+}
+.home .max-width {
+    margin: auto; 
+    width: 1500px;
+}
+
+
+/*******tables*********/
+.table{
+    height: 100%;
+    width: 100%;
+    border:  1px solid lightgray;
+    font-size: 17px;
+    font-family: 'Poppins' , sans-serif;
+}
+th, td {
     border: none;
-    border-right: 1px solid #61892f;
+    border:  1px solid lightgray;
     padding: 4px 12px;
 }
-
-.table tr td:nth-child(n+5) {
-    border-right: none;
-}
-
-.table tbody tr:nth-child(odd) {
-   
-}
-
-.message {
-    font: 12pt verdana;
+th {
+    background-color: darkslategrey;
     color: white;
 }
-
-footer {
-    display: flex;
-    justify-content: center;
-    align-content: center;
+td {
+    height: 100px;  
 }
 
+ .bn-table{
+    width: 100%;
+    height: 75%;
+    border: 2px solid darkslategray;
+    background: darkslategray;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.bn-table:hover{
+    color: darkslategray;
+    background: none;
+}
+
+
+/********login & signing*******/
+
+.btn-normal{
+     margin-left: 35px;
+    width: 200px;
+    border: 2px solid darkslategray;
+    background: darkslategray;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-normal:hover{
+    color: darkslategray;
+    background: none;
+}
+.links-login{
+    height: 60px;
+}
+.links-login a{
+    display: block;
+    text-align: center;
+}
+.links-login a:hover{
+   color: darkslategray;
+    background: white;
+}
+
+.form-loggin{
+   margin-left: 500px;
+    margin: 15px;
+    padding: auto;
+}
+.input-form{
+    height: 100%;
+    width: 200px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    outline: none;
+    padding: 0 15px;
+    font-size: 17px;
+    font-family: 'Poppins' , sans-serif;
+}
+
+.form-sign div{
+    margin: auto;
+    padding: 10px;
+}
+/*****box with inputs*********/
+.box{
+    background: #222;
+    text-align: center;
+    border-radius: 6px;
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.box form .input-form{
+    width: 200px;
+    margin:  20px;
+}
+/******select***********/
+
+/********footer*****/
+footer {
+    background: black;
+    padding: 20px 23px;
+    color: white;
+    text-align: center;
+}

@@ -49,7 +49,7 @@ public class CourseGroup implements Serializable {
         r.append("<tr>");
         r.append(String.format("<td>%d</td>", getGroupNumber()));
         r.append(String.format("<td>%s</td>", getCourse().getDescription()));
-        r.append(String.format("<td><form action=\"EnrolledStudentsService\" method=\"POST\"><button name=\"selectedGroup\" value=\"%d\">Asignar</button></td></form>", getGroupNumber()));
+        r.append(String.format("<td><form action=\"EnrolledStudentsService\" method=\"POST\"><button class=\"bn-table\" name=\"selectedGroup\" value=\"%d\">Asignar</button></td></form>", getGroupNumber()));
         r.append("</tr>");
 
         return r.toString();
