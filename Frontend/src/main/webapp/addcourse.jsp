@@ -30,7 +30,7 @@
                     <h2>
                         Agregar Curso:
                     </h2>
-                    <div id="">
+                    <div>
                         <form action="AddCourseService" method="GET">
                             <table class="table">
                                 <thead>

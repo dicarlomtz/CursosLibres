@@ -2,11 +2,13 @@ package frontend.services;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.beans.SearchFilter;
 
+@WebServlet(name = "GoIndex", urlPatterns = {"/GoIndex"})
 public class GoIndex extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

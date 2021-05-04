@@ -40,11 +40,11 @@ public class FreeCourses {
         GenericUser user = null;
         try {
             user = new StudentDAO().retrieve(indentification);
-        } catch (IOException | SQLException ex) {
+        } catch (Exception ex) {
 
             try {
                 user = new ProfessorDAO().retrieve(indentification);
-            } catch (IOException | SQLException ex1) {
+            } catch (Exception ex1) {
                 user = new AdministratorDAO().retrieve(indentification);
             }
         }
