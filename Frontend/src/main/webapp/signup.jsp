@@ -37,13 +37,13 @@
                                         <input class="input-form" type="number" name="identification" placeholder="Identificación" min="100000000" max="999999999" title="Debe ingresar el formato: XXXXXXXXX" required>
                                     </div>
                                     <div>
-                                        <input class="input-form" type="text" name="lastName1" placeholder="Primer apellido" pattern="[A-Za-z]" title="Solo puede ingresar letras" required>
+                                        <input class="input-form" type="text" name="lastName1" placeholder="Primer apellido" pattern="[a-zA-Z]+" title="Solo puede ingresar letras" required>
                                     </div>
                                     <div>
-                                        <input class="input-form" type="text" name="lastName2" placeholder="Segundo apellido" pattern="[A-Za-z]" title="Solo puede ingresar letras" required>
+                                        <input class="input-form" type="text" name="lastName2" placeholder="Segundo apellido" pattern="[a-zA-Z]+" title="Solo puede ingresar letras" required>
                                     </div>
                                     <div>
-                                        <input class="input-form" type="text" name="name" placeholder="Nombre" pattern="[A-Za-z]" title="Solo puede ingresar letras" required>
+                                        <input class="input-form" type="text" name="name" placeholder="Nombre" pattern="[a-zA-Z]+" title="Solo puede ingresar letras" required>
                                     </div>
                                     <div>
                                         <input class="input-form" type="number" name="telephoneNumber" placeholder="Número telefónico" min="10000000" max="99999999" title="Debe ingresar el formato: XXXXXXXX" required>

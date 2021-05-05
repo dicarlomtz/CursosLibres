@@ -86,7 +86,7 @@ public class Enrollment implements Serializable {
         r.append("<tr>");
         r.append(String.format("<td>%d</td>", getStudent().getId()));
         r.append(String.format("<td>%s %s %s</td>", getStudent().getName(), getStudent().getLastName1(), getStudent().getLastName2()));
-        r.append(String.format("<td><input class=\"input\" type=\"number\" minlegnth=\"0\" maxlength=\"10\" name=\"%s\" placeholder=\"%d\" title=\"Debe ingresar el formato: XX {1-10}\"></td>", generateCompoundIdentifier(), getGrade()));
+        r.append(String.format("<td><input class=\"input\" type=\"number\" min=\"0\" max=\"10\" name=\"%s\" placeholder=\"%d\" title=\"Debe ingresar el formato: XX {1-10}\"></td>", generateCompoundIdentifier(), getGrade()));
         r.append("</tr>");
 
         return r.toString();
