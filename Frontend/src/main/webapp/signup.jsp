@@ -22,6 +22,7 @@
                 <div class="links-login">
                     <a class="btn-normal" href = "signin.jsp">Iniciar Sesión</a>
                     <a class="btn-normal" href = "signup.jsp">Crear cuenta</a>
+                    <a class="btn-normal" href="index.jsp">Página principal</a>
                 </div>
             </nav>
 

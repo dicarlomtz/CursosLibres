@@ -160,10 +160,11 @@ td {
     background: none;
 }
 .links-login{
-    height: 60px;
+    height: 40px;
 }
 .links-login a{
-    display: block;
+    display: inline-block;
+    height:100%;
     text-align: center;
 }
 .links-login a:hover{
@@ -172,7 +173,7 @@ td {
 }
 
 .form-loggin{
-   margin-left: 500px;
+    margin-left: 500px;
     margin: 15px;
     padding: auto;
 }
