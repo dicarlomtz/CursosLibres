@@ -8,7 +8,6 @@
     Proyecto #1, Sistema web CursosLibres.com
 --%>
 
-<%@page import="model.beans.GenericUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="/WEB-INF/tlds/project.tld" prefix="project"%>
 <!DOCTYPE html>
@@ -26,28 +25,13 @@
 
                 <div class="navbar-links">
                     <ul>  
-                    <%
-                        try {
-
-                            GenericUser user = (GenericUser) request.getSession(false).getAttribute("user");
-                            String name = user.getLastName1() + " " + user.getLastName2() + ", " + user.getName();
-
-                            out.print("<li>");
-                            out.print("<form action=\"PanelService\">");
-                            out.print(String.format("<button >%s</button>", name));
-                            out.print("</form>");
-                            out.print("</li>");
-
-                        } catch (Exception e) {
-                            out.print("<li>");
-                            out.print("<form action=\"signup.jsp\">");
-                            out.print("<button >Registrarse</button>");
-                            out.print("</form>");
-                            out.print("</li>");
-                        }
-                    %>
-
-                </ul>
+                        <li>      
+                            <form action="GoIndex">
+                                <button >Página principal</button>  
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </nav>
 
             <div class="home">
