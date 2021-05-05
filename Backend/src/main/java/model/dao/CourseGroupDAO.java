@@ -1,3 +1,13 @@
+/*
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #1, Sistema web CursosLibres.com
+*/
+
 package model.dao;
 
 import cr.ac.una.db.dao.AbstractDAO;
@@ -41,5 +51,4 @@ public class CourseGroupDAO extends AbstractDAO<Integer, CourseGroup> {
         stm.setInt(2, value.getProfessor().getId());
         stm.setInt(3, id);
     }
-
 }

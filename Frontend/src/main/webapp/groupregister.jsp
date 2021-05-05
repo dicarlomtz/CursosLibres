@@ -1,3 +1,13 @@
+<%--
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #1, Sistema web CursosLibres.com
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="/WEB-INF/tlds/project.tld" prefix="project"%>
 <!DOCTYPE html>
@@ -16,7 +26,6 @@
 
                 <div class="navbar-links">
                     <ul>  
-
                         <li>      
                             <form action="index.jsp">
                                 <button >Página principal</button>  
@@ -29,9 +38,9 @@
             <div class="home">
                 <div class="max-width">
                     <div class="box" >
-                        
+
                         <h1>REGISTRAR GRUPO</h1>
-                        
+
                         <form action="RegisterGroupService" method="POST">
                             <input type="hidden" name="idCourse" value="${idCourse}"/>
                         <label for="professor">Seleccione un profesor:&nbsp;</label>

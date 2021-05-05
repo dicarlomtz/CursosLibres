@@ -1,3 +1,13 @@
+/*
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #1, Sistema web CursosLibres.com
+*/
+
 package model;
 
 import com.itextpdf.text.*;
@@ -5,7 +15,6 @@ import com.itextpdf.text.pdf.*;
 import java.io.*;
 import java.sql.SQLException;
 import model.beans.SetEnrollments;
-import java.util.ArrayList;
 import java.util.List;
 import model.beans.Enrollment;
 

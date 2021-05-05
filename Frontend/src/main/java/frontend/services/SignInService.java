@@ -1,10 +1,18 @@
+
+/*
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #1, Sistema web CursosLibres.com
+*/
+
 package frontend.services;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -92,5 +100,4 @@ public class SignInService extends HttpServlet {
 
     private static final String IDENTIFICATION_ID_PARAM = "identification";
     private static final String PASSWORD_ID_PARAM = "password";
-
 }

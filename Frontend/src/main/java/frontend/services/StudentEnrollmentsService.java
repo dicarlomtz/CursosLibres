@@ -1,3 +1,13 @@
+/*
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #1, Sistema web CursosLibres.com
+*/
+
 package frontend.services;
 
 import java.io.IOException;
@@ -26,7 +36,6 @@ public class StudentEnrollmentsService extends HttpServlet {
             request.setAttribute("message", "No es posible acceder a la información");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

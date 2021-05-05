@@ -1,3 +1,13 @@
+<%--
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #1, Sistema web CursosLibres.com
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +24,6 @@
 
                 <div class="navbar-links">
                     <ul>  
-
                         <li>      
                             <form action="index.jsp">
                                 <button >Página principal</button>  
@@ -29,10 +38,10 @@
                     <div class="box" style="display: -webkit-inline-box;">
                         <h1 style="font-size: 100px">Oops!</h1>
                     ${message}
-                    </div>
                 </div>
             </div>
-                    
+        </div>
+
         <footer>
 
             <footer>

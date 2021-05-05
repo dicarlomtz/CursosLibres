@@ -1,3 +1,13 @@
+/*
+    Universidad Nacional de Costa Rica
+    Escuela de Informática
+    EIF209 Programación IV, ciclo I 2021
+    Mauricio Gutiérrez Vásquez 118260119
+    Adolfo Di Carlo Martínez Martínez 118050228
+    Yeikol Villalobos Herrera 702670531
+    Proyecto #1, Sistema web CursosLibres.com
+*/
+
 package frontend.services;
 
 import java.io.IOException;
@@ -94,5 +104,4 @@ public class SignUpService extends HttpServlet {
     private static final String TELEPHONENUMBER_ID_PARAM = "telephoneNumber";
     private static final String EMAIL_ID_PARAM = "email";
     private static final String USERNAME_ID_PARAM = "userName";
-
 }
