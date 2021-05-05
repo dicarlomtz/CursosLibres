@@ -43,7 +43,6 @@ public class EnrollGroupStudentService extends HttpServlet {
                     request.setAttribute("message", "No es posible acceder a la información");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
-                response.sendRedirect("studentpanel.jsp");
             } else {
                 request.setAttribute("message", "No es posible acceder a la información");
                 request.getRequestDispatcher("error.jsp").forward(request, response);

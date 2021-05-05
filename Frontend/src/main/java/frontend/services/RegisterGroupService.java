@@ -6,8 +6,7 @@
     Adolfo Di Carlo Martínez Martínez 118050228
     Yeikol Villalobos Herrera 702670531
     Proyecto #1, Sistema web CursosLibres.com
-*/
-
+ */
 package frontend.services;
 
 import java.io.IOException;
@@ -49,8 +48,11 @@ public class RegisterGroupService extends HttpServlet {
                 request.setAttribute("message", "No es posible acceder a la información");
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
-        } catch (IOException | SQLException | NumberFormatException ex) {
+        } catch (IOException | NumberFormatException ex) {
             request.setAttribute("message", "No es posible acceder a la información");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } catch (SQLException ex1) {
+            request.setAttribute("message", "Número de grupo no disponible");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
 

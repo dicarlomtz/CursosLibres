@@ -69,10 +69,10 @@ public class RegisterProfessorService extends HttpServlet {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
 
-        } catch (IOException ex) {
+        } catch (SQLException ex) {
             request.setAttribute("message", "Usuario previamente registrado");
             request.getRequestDispatcher("professorregister.jsp").forward(request, response);
-        } catch (NumberFormatException | SQLException ex1) {
+        } catch (NumberFormatException | IOException ex1) {
             request.setAttribute("message", "No es posible acceder a la información");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

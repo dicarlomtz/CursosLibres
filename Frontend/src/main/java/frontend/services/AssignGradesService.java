@@ -6,8 +6,7 @@
     Adolfo Di Carlo Martínez Martínez 118050228
     Yeikol Villalobos Herrera 702670531
     Proyecto #1, Sistema web CursosLibres.com
-*/
-
+ */
 package frontend.services;
 
 import java.io.IOException;
@@ -37,18 +36,23 @@ public class AssignGradesService extends HttpServlet {
 
             Enumeration<String> identifiers = request.getParameterNames();
             FreeCourses logic = new FreeCourses();
+            if (identifiers.hasMoreElements()) {
 
-            while (identifiers.hasMoreElements()) {
-                try {
-                    String identifier = identifiers.nextElement();
-                    int grade = Integer.parseInt(request.getParameter(identifier));
-                    logic.assignNote(identifier, grade);
-                    response.sendRedirect("professorpanel.jsp");
-                } catch (SQLException | NumberFormatException | IOException ex) {
-                    request.setAttribute("message", "No es posible accesar a la información");
-                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                while (identifiers.hasMoreElements()) {
+                    try {
+                        String identifier = identifiers.nextElement();
+                        int grade = Integer.parseInt(request.getParameter(identifier));
+                        logic.assignNote(identifier, grade);
+                        response.sendRedirect("professorpanel.jsp");
+                    } catch (SQLException | NumberFormatException | IOException ex) {
+                        request.setAttribute("message", "No es posible accesar a la información");
+                        request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
                 }
+            } else {
+                response.sendRedirect("index.jsp");
             }
+
         } else {
             request.setAttribute("message", "No es posible accesar a la información");
             request.getRequestDispatcher("error.jsp").forward(request, response);

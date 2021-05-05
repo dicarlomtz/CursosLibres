@@ -6,8 +6,7 @@
     Adolfo Di Carlo Martínez Martínez 118050228
     Yeikol Villalobos Herrera 702670531
     Proyecto #1, Sistema web CursosLibres.com
-*/
-
+ */
 package model;
 
 import java.io.IOException;
@@ -79,6 +78,17 @@ public class FreeCourses {
     }
 
     public String signUpProfessor(int identification, String lastName1, String lastName2, String name, int telephoneNumber, String email, String userName) throws IOException, SQLException {
+        GenericUser user = null;
+        try {
+            user = new StudentDAO().retrieve(identification);
+        } catch (Exception ex) {
+            user = new AdministratorDAO().retrieve(identification);
+        }
+        
+        if(!Objects.isNull(user)){
+            throw new SQLException();
+        }
+
         UserAccountData accData;
         String password = RandomPassword.getInstance().generate();
         RolDAO dao = new RolDAO();
@@ -134,6 +144,10 @@ public class FreeCourses {
     }
 
     public void enrollCourseStudent(int groupNumber, int id) throws IOException, SQLException {
+        int can = new SetEnrollments().getListStudentEnrollments(id).size();
+        if(can != 0){
+            throw new SQLException();
+        }
         CourseGroup cg = new SetCourseGroups().retrieve(groupNumber);
         new SetEnrollments().add(new Enrollment(new StudentDAO().retrieve(id), cg, cg.getCourse(), new ConditionDAO().retrieve(4), 0));
     }

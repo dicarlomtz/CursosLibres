@@ -42,10 +42,10 @@ public class AddCourseService extends HttpServlet {
             try {
                 instance.addCourse(new Course(idCourse, description, new SetThematicAreas().retrieve(Integer.parseInt(thematicArea))));
                 response.sendRedirect("listcourses.jsp");
-            } catch (IOException ex) {
-                request.setAttribute("message", "Número de grupo no disponible");
+            } catch (SQLException ex) {
+                request.setAttribute("message", "Número de curso no disponible");
                 request.getRequestDispatcher("error.jsp").forward(request, response);
-            } catch (SQLException | NumberFormatException ex1) {
+            } catch (IOException | NumberFormatException ex1) {
                 request.setAttribute("message", "No es posible acceder a la información");
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
