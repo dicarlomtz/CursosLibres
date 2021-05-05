@@ -80,6 +80,10 @@
         <servlet-name>FilterAllCoursesAdminService</servlet-name>
         <servlet-class>frontend.services.FilterAllCoursesAdminService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SignOutService</servlet-name>
+        <servlet-class>frontend.services.SignOutService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCourseService</servlet-name>
         <url-pattern>/AddCourseService</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>FilterAllCoursesAdminService</servlet-name>
         <url-pattern>/FilterAllCoursesAdminService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignOutService</servlet-name>
+        <url-pattern>/SignOutService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
