@@ -8,8 +8,6 @@
     Proyecto #1, Sistema web CursosLibres.com
 --%>
 
-<%@page import="model.FreeCourses"%>
-<%@page import="model.beans.GenericUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="/WEB-INF/tlds/project.tld" prefix="project"%>
 <!DOCTYPE html>
@@ -35,65 +33,53 @@
                             <button type="submit">Buscar</button>
                         </form>
                     </li>
-                    <%
-                        try {
-
-                            GenericUser user = (GenericUser) request.getSession(false).getAttribute("user");
-                            String name = user.getLastName1() + " " + user.getLastName2() + ", " + user.getName();
-
-                            out.print("<li>");
-                            out.print("<form action=\"PanelService\">");
-                            out.print(String.format("<button >%s</button>", name));
-                            out.print("</form>");
-                            out.print("</li>");
-                        } catch (Exception e) {
-                            out.print("<li>");
-                            out.print("<form action=\"signup.jsp\">");
-                            out.print("<button >Registrarse</button>");
-                            out.print("</form>");
-                            out.print("</li>");
-                        }
-                    %>
-                </ul>
-            </div>
-        </nav>
-
-        <div class="home">
-            <div class="max-width">
-                <div class="box">
-                    <h2>
-                        Lista de cursos:
-                    </h2>
-
-                    <div>
-                        <p style="font-style: italic;">Buscando por: <strong>${searchParameter}</strong></p>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Descripción</th>
-                                    <th>Area temática</th>
-                                    <th>Horarios</th>
-                                    <th>Agregar grupos</th>
-                                    <th>Modificar curso</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${project:coursesAdmin(searchParameter)}
-                            </tbody>
-                            <tfoot></tfoot>
-                        </table>
-                        <form action="addcourse.jsp">
-                            <button class="btn-normal " style="margin-top: 25px" >Agregar curso</button>
+                    <li>      
+                        <form action="GoIndex">
+                            <button >Página principal</button>  
                         </form>
-                    </div>
-                </div>
+                    </li>
+
+            </div>
+        </ul>
+    </div>
+</nav>
+
+<div class="home">
+    <div class="max-width">
+        <div class="box">
+            <h2>
+                Lista de cursos:
+            </h2>
+
+            <div>
+                <p style="font-style: italic;">Buscando por: <strong>${searchParameter}</strong></p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descripción</th>
+                            <th>Area temática</th>
+                            <th>Horarios</th>
+                            <th>Agregar grupos</th>
+                            <th>Modificar curso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${project:coursesAdmin(searchParameter)}
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+                <form action="addcourse.jsp">
+                    <button class="btn-normal " style="margin-top: 25px" >Agregar curso</button>
+                </form>
             </div>
         </div>
-        <footer>
-            <p>
-                Todos los derechos reservados &copy; 2021
-            </p>
-        </footer>
-    </body>
+    </div>
+</div>
+<footer>
+    <p>
+        Todos los derechos reservados &copy; 2021
+    </p>
+</footer>
+</body>
 </html>

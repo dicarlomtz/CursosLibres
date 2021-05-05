@@ -27,9 +27,9 @@
                 <div class="navbar-links">
                     <ul>  
 
-                        <li>   
-                            <form action="listcourses.jsp">
-                                <button class="button">Ver lista de cursos</button>
+                        <li>      
+                            <form action="GoIndex">
+                                <button >Página principal</button>  
                             </form>
                         </li>
                     </ul>

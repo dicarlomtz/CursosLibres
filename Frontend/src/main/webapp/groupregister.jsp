@@ -26,8 +26,9 @@
 
                 <div class="navbar-links">
                     <ul>  
+
                         <li>      
-                            <form action="index.jsp">
+                            <form action="GoIndex">
                                 <button >Página principal</button>  
                             </form>
                         </li>
