@@ -32,7 +32,7 @@ public class SignOutService extends HttpServlet {
 
         if (!Objects.isNull(user)) {
 
-            
+            request.getSession(true).invalidate();
             response.sendRedirect("index.jsp");
             
         } else {

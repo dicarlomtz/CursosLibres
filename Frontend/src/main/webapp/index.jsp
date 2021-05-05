@@ -51,7 +51,7 @@
                             
                             out.print("<li>");
                             out.print("<form action=\"SignOutService\">");
-                            out.print("<button >Cerrar cesión</button>");
+                            out.print("<button >Cerrar sesión</button>");
                             out.print("</form>");
                             out.print("</li>");
                             
