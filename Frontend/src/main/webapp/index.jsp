@@ -48,6 +48,13 @@
                             out.print(String.format("<button >%s</button>", name));
                             out.print("</form>");
                             out.print("</li>");
+                            
+                            out.print("<li>");
+                            out.print("<form action=\"SignOutService\">");
+                            out.print("<button >Cerrar cesión</button>");
+                            out.print("</form>");
+                            out.print("</li>");
+                            
                         } catch (Exception e) {
                             out.print("<li>");
                             out.print("<form action=\"signup.jsp\">");
