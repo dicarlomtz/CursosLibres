@@ -64,6 +64,25 @@ public class FreeCourses {
 
     public String signUp(int identification, String lastName1, String lastName2, String name, int telephoneNumber, String email, String userName) throws IOException, SQLException {
 
+        GenericUser user = null;
+        try {
+            user = new StudentDAO().retrieve(identification);
+        } catch (Exception ex) {
+            try {
+                user = new ProfessorDAO().retrieve(identification);
+            } catch (Exception ex1) {
+                try {
+                    user = new AdministratorDAO().retrieve(identification);
+                } catch (Exception ex2) {
+
+                }
+            }
+        }
+
+        if (!Objects.isNull(user)) {
+            throw new IllegalArgumentException();
+        }
+
         UserAccountData accData;
         String password = RandomPassword.getInstance().generate();
         RolDAO dao = new RolDAO();
@@ -82,11 +101,19 @@ public class FreeCourses {
         try {
             user = new StudentDAO().retrieve(identification);
         } catch (Exception ex) {
-            user = new AdministratorDAO().retrieve(identification);
+            try {
+                user = new ProfessorDAO().retrieve(identification);
+            } catch (Exception ex1) {
+                try {
+                    user = new AdministratorDAO().retrieve(identification);
+                } catch (Exception ex2) {
+
+                }
+            }
         }
-        
-        if(!Objects.isNull(user)){
-            throw new SQLException();
+
+        if (!Objects.isNull(user)) {
+            throw new IllegalArgumentException();
         }
 
         UserAccountData accData;
@@ -144,8 +171,8 @@ public class FreeCourses {
     }
 
     public void enrollCourseStudent(int groupNumber, int id) throws IOException, SQLException {
-        int can = new SetEnrollments().getListStudentEnrollments(id).size();
-        if(can != 0){
+        int can = new SetEnrollments().getListStudentEnrollmentsGroup(id, groupNumber).size();
+        if (can != 0) {
             throw new SQLException();
         }
         CourseGroup cg = new SetCourseGroups().retrieve(groupNumber);

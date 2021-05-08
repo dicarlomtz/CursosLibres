@@ -6,8 +6,7 @@
     Adolfo Di Carlo Martínez Martínez 118050228
     Yeikol Villalobos Herrera 702670531
     Proyecto #1, Sistema web CursosLibres.com
-*/
-
+ */
 package frontend.services;
 
 import java.io.IOException;
@@ -62,17 +61,17 @@ public class RegisterProfessorService extends HttpServlet {
                     request.getRequestDispatcher("professorregister.jsp").forward(request, response);
                 } else {
                     request.setAttribute("message", "Debe seleccionar al menos una especialidad");
-                    request.getRequestDispatcher("professorregister.jso").forward(request, response);
+                    request.getRequestDispatcher("professorregister.jsp").forward(request, response);
                 }
             } else {
                 request.setAttribute("message", "No es posible acceder a la información");
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
 
-        } catch (SQLException ex) {
+        } catch (IOException | IllegalArgumentException ex) {
             request.setAttribute("message", "Usuario previamente registrado");
             request.getRequestDispatcher("professorregister.jsp").forward(request, response);
-        } catch (NumberFormatException | IOException ex1) {
+        } catch (SQLException ex2) {
             request.setAttribute("message", "No es posible acceder a la información");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

@@ -6,8 +6,7 @@
     Adolfo Di Carlo Martínez Martínez 118050228
     Yeikol Villalobos Herrera 702670531
     Proyecto #1, Sistema web CursosLibres.com
-*/
-
+ */
 package model.beans;
 
 import java.io.IOException;
@@ -39,9 +38,9 @@ public class SetEnrollments extends Set<String, Enrollment> {
         return (Enrollment) dao.retrieve(id);
     }
 
-     @Override
+    @Override
     protected String toHTML() throws SQLException, IOException {
-       return null;
+        return null;
     }
 
     public List<Enrollment> listAllGroupNumber(int groupNumber) throws SQLException, IOException {
@@ -59,65 +58,72 @@ public class SetEnrollments extends Set<String, Enrollment> {
     public String toHTMLAllGroupNumber(int groupNumber) throws SQLException, IOException {
         List<Enrollment> enrollments = listAllGroupNumber(groupNumber);
         StringBuilder r = new StringBuilder();
-        for(Enrollment e : enrollments) {
+        for (Enrollment e : enrollments) {
             r.append(e.getHTMLTableAssignGrades());
         }
-        
+
         return r.toString();
     }
-    
+
     public String getTableGroupNumber(int groupNumber) throws SQLException, IOException {
         return toHTMLAllGroupNumber(groupNumber);
     }
-    
+
     public static String getTableGroupNumber(CourseGroup g) {
         try {
             return new SetEnrollments().getTableGroupNumber(g.getGroupNumber());
         } catch (Exception ex) {
-            
+
         }
         return "";
     }
- 
-    public List<Enrollment> getListStudentEnrollments(int id) throws SQLException, IOException
-    {
+
+    public List<Enrollment> getListStudentEnrollments(int id) throws SQLException, IOException {
         List<Enrollment> enrollments = listAll();
         List<Enrollment> aux = new ArrayList<>();
-        
-        for(Enrollment e : enrollments)
-        {
-            if(e.getStudent().getId() == id)
-            {
+
+        for (Enrollment e : enrollments) {
+            if (e.getStudent().getId() == id) {
                 aux.add(e);
             }
         }
-        
+
         return aux;
     }
-    
-    protected String toHTMLStudentEnrollments(int id) throws SQLException, IOException
-    {
+
+    public List<Enrollment> getListStudentEnrollmentsGroup(int id, int groupNumber) throws SQLException, IOException {
+        List<Enrollment> enrollments = getListStudentEnrollments(id);
+        List<Enrollment> aux = new ArrayList<>();
+
+        for (Enrollment e : enrollments) {
+            if (e.getGroup().getGroupNumber() == groupNumber) {
+                aux.add(e);
+            }
+        }
+
+        return aux;
+    }
+
+    protected String toHTMLStudentEnrollments(int id) throws SQLException, IOException {
         List<Enrollment> enroll = getListStudentEnrollments(id);
         StringBuilder r = new StringBuilder();
-        
-        for (Enrollment e : enroll)
-        {
+
+        for (Enrollment e : enroll) {
             r.append(e.getHTMLTableStudent());
         }
-        
+
         return r.toString();
     }
-    
-    public String getHTMLStudentEnrollments(int id) throws SQLException, IOException
-    {
+
+    public String getHTMLStudentEnrollments(int id) throws SQLException, IOException {
         return toHTMLStudentEnrollments(id);
     }
-    
-    public static String getHTMLStudentEnrollments(String id){
+
+    public static String getHTMLStudentEnrollments(String id) {
         try {
             return new SetEnrollments().getHTMLStudentEnrollments(Integer.parseInt(id));
         } catch (Exception ex) {
-            
+
         }
         return "";
     }
