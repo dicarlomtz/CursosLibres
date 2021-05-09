@@ -115,8 +115,8 @@ public class Course implements Serializable {
         r.append(new SetThematicAreas().getHTMLThematicAreas());
         r.append(String.format("\t\t\t\t</select></td>\n"));
         r.append(String.format("\t\t\t\t<td><select name=\"promotion\">"));
-        r.append(String.format("<option value=\"1\">%s</option>", "En promoción"));
-        r.append(String.format("<option value=\"0\">%s</option>", "Revocar promoción"));
+        r.append(String.format("<option value=\"True\">%s</option>", "En promoción"));
+        r.append(String.format("<option value=\"yes\">%s</option>", "Revocar promoción"));
         r.append(String.format("\t\t\t\t</select></td>\n"));
         r.append(String.format("\t\t\t\t<td><button class=\"bn-table\" name=\"idCourseM\" value=\"%d\">%s</button></td>\n", this.getId(), "Modificar"));
         r.append("\t\t\t</tr>\n");

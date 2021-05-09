@@ -41,22 +41,22 @@ public class CourseGroupCRUD extends AbstractCRUD {
 
     protected static final String LIST_CMD
             = "SELECT "
-            + "num_grupo, curso_id, profesor_id "
+            + "num_grupo, curso_id, profesor_id, promocion "
             + "FROM eif209_2021_01.grupo ORDER BY num_grupo; ";
 
     protected static final String ADD_CMD
             = "INSERT INTO eif209_2021_01.grupo "
-            + "(num_grupo, curso_id, profesor_id) "
-            + "VALUES (?, ?, ?); ";
+            + "(num_grupo, curso_id, profesor_id, promocion) "
+            + "VALUES (?, ?, ?, ?); ";
 
     protected static final String RETRIEVE_CMD
             = "SELECT "
-            + "num_grupo, curso_id, profesor_id "
+            + "num_grupo, curso_id, profesor_id, promocion "
             + "FROM eif209_2021_01.grupo WHERE num_grupo = ?; ";
 
     protected static final String UPDATE_CMD
             = "UPDATE eif209_2021_01.grupo "
-            + "SET curso_id = ?, profesor_id = ? "
+            + "SET curso_id = ?, profesor_id = ?, promocion = ? "
             + "WHERE num_grupo = ?; ";
 
     protected static final String DELETE_CMD

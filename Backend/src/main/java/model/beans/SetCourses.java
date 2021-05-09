@@ -6,8 +6,7 @@
     Adolfo Di Carlo Martínez Martínez 118050228
     Yeikol Villalobos Herrera 702670531
     Proyecto #1, Sistema web CursosLibres.com
-*/
-
+ */
 package model.beans;
 
 import java.io.IOException;
@@ -49,8 +48,8 @@ public class SetCourses extends Set<Integer, Course> {
         List<Course> coursesFilter = new ArrayList<>();
 
         for (Course c : courses) {
-            if (c.getDescription().toLowerCase().contains(filter.toLowerCase()) | 
-                    c.getThematicArea().getDescription().toLowerCase().contains(filter.toLowerCase())) {
+            if (c.getDescription().toLowerCase().contains(filter.toLowerCase())
+                    | c.getThematicArea().getDescription().toLowerCase().contains(filter.toLowerCase())) {
                 coursesFilter.add(c);
             }
         }
@@ -63,7 +62,9 @@ public class SetCourses extends Set<Integer, Course> {
         StringBuilder r = new StringBuilder();
 
         for (Course c : courses) {
-            r.append(c.getHTMLTable());
+            if (c.getPromotion()) {
+                r.append(c.getHTMLTable());
+            }
         }
 
         return r.toString();
@@ -114,13 +115,13 @@ public class SetCourses extends Set<Integer, Course> {
 
         return r.toString();
     }
-    
+
     public static String getSpecificCourse(String id) {
 
         try {
             return new SetCourses().toHTMLSpecificCourse(Integer.parseInt(id));
         } catch (Exception ex) {
-            
+
         }
         return "";
     }

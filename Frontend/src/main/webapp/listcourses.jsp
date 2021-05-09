@@ -38,48 +38,46 @@
                             <button >Página principal</button>  
                         </form>
                     </li>
-
+                </ul>
             </div>
-        </ul>
-    </div>
-</nav>
+        </nav>
 
-<div class="home">
-    <div class="max-width">
-        <div class="box">
-            <h2>
-                Lista de cursos:
-            </h2>
+        <div class="home">
+            <div class="max-width">
+                <div class="box">
+                    <h2>
+                        Lista de cursos:
+                    </h2>
 
-            <div>
-                <p style="font-style: italic;">Buscando por: <strong>${searchParameter}</strong></p>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Descripción</th>
-                            <th>Area temática</th>
-                            <th>Horarios</th>
-                            <th>Agregar grupos</th>
-                            <th>Modificar curso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${project:coursesAdmin(searchParameter)}
-                    </tbody>
-                    <tfoot></tfoot>
-                </table>
-                <form action="addcourse.jsp">
-                    <button class="btn-normal " style="margin-top: 25px" >Agregar curso</button>
-                </form>
+                    <div>
+                        <p style="font-style: italic;">Buscando por: <strong>${searchParameter}</strong></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descripción</th>
+                                    <th>Area temática</th>
+                                    <th>Horarios</th>
+                                    <th>Agregar grupos</th>
+                                    <th>Modificar curso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${project:coursesAdmin(searchParameter)}
+                            </tbody>
+                            <tfoot></tfoot>
+                        </table>
+                        <form action="addcourse.jsp">
+                            <button class="btn-normal " style="margin-top: 25px" >Agregar curso</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<footer>
-    <p>
-        Todos los derechos reservados &copy; 2021
-    </p>
-</footer>
-</body>
+        <footer>
+            <p>
+                Todos los derechos reservados &copy; 2021
+            </p>
+        </footer>
+    </body>
 </html>

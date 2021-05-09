@@ -34,7 +34,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
         </nav>
 
         <div class="home">

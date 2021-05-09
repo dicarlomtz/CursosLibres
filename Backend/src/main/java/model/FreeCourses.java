@@ -185,10 +185,10 @@ public class FreeCourses {
     }
 
     public void registerGroup(int idCourse, int groupNumber, int idProfessor, int day, int hour) throws IOException, SQLException {
-        CourseGroup cp = new CourseGroup(groupNumber, new CourseDAO().retrieve(idCourse), new ProfessorDAO().retrieve(idProfessor));
+        Course c = new CourseDAO().retrieve(idCourse);
+        CourseGroup cp = new CourseGroup(groupNumber, c, new ProfessorDAO().retrieve(idProfessor), c.getPromotion());
         new CourseGroupDAO().add(cp.getGroupNumber(), cp);
         new ScheduleDAO().add(0, new Schedule(0, cp, cp.getCourse(), day, hour));
-
     }
 
     public void addCourse(Course course) throws IOException, SQLException {

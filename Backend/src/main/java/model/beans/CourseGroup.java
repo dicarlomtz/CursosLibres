@@ -14,13 +14,14 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = "courseGroup", propOrder = {"groupNumber", "course", "professor"})
+@XmlType(name = "courseGroup", propOrder = {"groupNumber", "course", "professor", "promotion"})
 public class CourseGroup implements Serializable {
 
-    public CourseGroup(int groupNumber, Course course, Professor professor) {
+    public CourseGroup(int groupNumber, Course course, Professor professor, boolean promotion) {
         this.groupNumber = groupNumber;
         this.course = course;
         this.professor = professor;
+        this.promotion = promotion;
     }
 
     public CourseGroup() {
@@ -52,6 +53,15 @@ public class CourseGroup implements Serializable {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+    
+    public boolean getPromotion() {
+        return promotion;
+    }
+
+    @XmlElement(name = "promotion")
+    public void setPromotion(boolean promotion) {
+        this.promotion = promotion;
+    }
 
     protected String toHTMLTableProfessor() {
         StringBuilder r = new StringBuilder();
@@ -81,4 +91,5 @@ public class CourseGroup implements Serializable {
     private int groupNumber;
     private Course course;
     private Professor professor;
+    private boolean promotion;
 }

@@ -6,8 +6,7 @@
     Adolfo Di Carlo Martínez Martínez 118050228
     Yeikol Villalobos Herrera 702670531
     Proyecto #1, Sistema web CursosLibres.com
-*/
-
+ */
 package model.dao;
 
 import cr.ac.una.db.dao.AbstractDAO;
@@ -30,7 +29,8 @@ public class CourseGroupDAO extends AbstractDAO<Integer, CourseGroup> {
         return new CourseGroup(
                 rs.getInt("num_grupo"),
                 new CourseDAO().retrieve(rs.getInt("curso_id")),
-                new ProfessorDAO().retrieve(rs.getInt("profesor_id"))
+                new ProfessorDAO().retrieve(rs.getInt("profesor_id")),
+                rs.getBoolean("promocion")
         );
     }
 
@@ -41,6 +41,7 @@ public class CourseGroupDAO extends AbstractDAO<Integer, CourseGroup> {
         stm.setInt(1, id);
         stm.setInt(2, value.getCourse().getId());
         stm.setInt(3, value.getProfessor().getId());
+        stm.setBoolean(4, value.getPromotion());
     }
 
     @Override
@@ -49,6 +50,8 @@ public class CourseGroupDAO extends AbstractDAO<Integer, CourseGroup> {
             throws SQLException {
         stm.setInt(1, value.getCourse().getId());
         stm.setInt(2, value.getProfessor().getId());
-        stm.setInt(3, id);
+        stm.setBoolean(3, value.getPromotion());
+        stm.setInt(4, id);
+
     }
 }
