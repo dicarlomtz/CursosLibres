@@ -40,7 +40,7 @@ public class AddCourseService extends HttpServlet {
 
             FreeCourses instance = new FreeCourses();
             try {
-                instance.addCourse(new Course(idCourse, description, new SetThematicAreas().retrieve(Integer.parseInt(thematicArea))));
+                instance.addCourse(new Course(idCourse, description, new SetThematicAreas().retrieve(Integer.parseInt(thematicArea)), true));
                 response.sendRedirect("listcourses.jsp");
             } catch (SQLException ex) {
                 request.setAttribute("message", "Número de curso no disponible");

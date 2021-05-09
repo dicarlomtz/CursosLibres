@@ -41,22 +41,22 @@ public class CourseCRUD extends AbstractCRUD {
 
     protected static final String LIST_CMD
             = "SELECT "
-            + "id_curso, descripcion, area_tematica_id "
+            + "id_curso, descripcion, area_tematica_id, promocion "
             + "FROM eif209_2021_01.curso ORDER BY id_curso; ";
 
     protected static final String ADD_CMD
             = "INSERT INTO eif209_2021_01.curso "
-            + "(id_curso, descripcion, area_tematica_id) "
-            + "VALUES (?, ?, ?); ";
+            + "(id_curso, descripcion, area_tematica_id, promocion) "
+            + "VALUES (?, ?, ?, ?); ";
 
     protected static final String RETRIEVE_CMD
             = "SELECT "
-            + "id_curso, descripcion, area_tematica_id "
+            + "id_curso, descripcion, area_tematica_id, promocion "
             + "FROM eif209_2021_01.curso WHERE id_curso = ?; ";
 
     protected static final String UPDATE_CMD
             = "UPDATE eif209_2021_01.curso "
-            + "SET area_tematica_id = ?, descripcion = ? "
+            + "SET area_tematica_id = ?, descripcion = ?, promocion = ? "
             + "WHERE id_curso = ?; ";
 
     protected static final String DELETE_CMD

@@ -46,6 +46,7 @@
                                     <th>ID</th>
                                     <th>Descripción</th>
                                     <th>Area temática</th>
+                                    <th>Promoción</th>
                                     <th>Guardar cambios</th>
                                 </tr>
                             </thead>

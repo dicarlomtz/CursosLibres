@@ -29,7 +29,7 @@ public class CourseDAO extends AbstractDAO<Integer, Course> {
             throws SQLException, IOException {
         return new Course(rs.getInt("id_curso"),
                 rs.getString("descripcion"),
-                new ThematicAreaDAO().retrieve(rs.getInt("area_tematica_id")));
+                new ThematicAreaDAO().retrieve(rs.getInt("area_tematica_id")), rs.getBoolean("promocion"));
     }
 
     @Override
@@ -39,6 +39,7 @@ public class CourseDAO extends AbstractDAO<Integer, Course> {
         stm.setInt(1, id);
         stm.setString(2, value.getDescription());
         stm.setInt(3, value.getThematicArea().getId());
+        stm.setBoolean(4, value.getPromotion());
     }
 
     @Override
@@ -48,5 +49,6 @@ public class CourseDAO extends AbstractDAO<Integer, Course> {
         stm.setInt(1, value.getThematicArea().getId());
         stm.setString(2, value.getDescription());
         stm.setInt(3, id);
+        stm.setBoolean(4, value.getPromotion());
     }
 }

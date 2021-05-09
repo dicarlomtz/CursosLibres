@@ -16,13 +16,14 @@ import java.sql.SQLException;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = "course", propOrder = {"id", "description", "thematicArea"})
+@XmlType(name = "course", propOrder = {"id", "description", "thematicArea", "promotion"})
 public class Course implements Serializable {
 
-    public Course(int id, String description, ThematicArea thematicArea) {
+    public Course(int id, String description, ThematicArea thematicArea, boolean promotion) {
         this.id = id;
         this.description = description;
         this.thematicArea = thematicArea;
+        this.promotion = promotion;
     }
 
     public Course() {
@@ -53,6 +54,17 @@ public class Course implements Serializable {
     @XmlElement(name = "thematicArea")
     public void setThematicArea(ThematicArea thematicArea) {
         this.thematicArea = thematicArea;
+    }
+    
+    public boolean getPromotion()
+    {
+        return this.promotion;
+    }
+    
+    @XmlElement(name = "promotion")
+    public void setPromotion(boolean promotion)
+    {
+        this.promotion = promotion;
     }
     
     protected String toHTMLTable() {
@@ -101,7 +113,11 @@ public class Course implements Serializable {
         r.append(String.format("\t\t\t\t<td><input class=\"input-form\" styles=\"height: 30px;\" name=\"courseDescription\" type=\"text\" value=\"%s\" title=\"%s\" required></input></td>\n", this.getDescription(), "Debe llenar todos los espacios"));
         r.append(String.format("\t\t\t\t<td><select name=\"thematicArea\">"));
         r.append(new SetThematicAreas().getHTMLThematicAreas());
-        r.append(String.format("</select></td>\n"));
+        r.append(String.format("\t\t\t\t</select></td>\n"));
+        r.append(String.format("\t\t\t\t<td><select name=\"promotion\">"));
+        r.append(String.format("<option value=\"1\">%s</option>", "En promoción"));
+        r.append(String.format("<option value=\"0\">%s</option>", "Revocar promoción"));
+        r.append(String.format("\t\t\t\t</select></td>\n"));
         r.append(String.format("\t\t\t\t<td><button class=\"bn-table\" name=\"idCourseM\" value=\"%d\">%s</button></td>\n", this.getId(), "Modificar"));
         r.append("\t\t\t</tr>\n");
         r.append("</form>");
@@ -116,4 +132,5 @@ public class Course implements Serializable {
     private int id;
     private String description;
     private ThematicArea thematicArea;
+    private boolean promotion;
 }

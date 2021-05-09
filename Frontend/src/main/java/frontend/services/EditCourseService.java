@@ -40,8 +40,9 @@ public class EditCourseService extends HttpServlet {
                 int idCourseM = Integer.parseInt(request.getParameter("idCourseM"));
                 String description = request.getParameter("courseDescription");
                 int thematicArea = Integer.parseInt(request.getParameter("thematicArea"));
+                boolean promotion = Boolean.parseBoolean(request.getParameter("promotion"));
 
-                new SetCourses().update(new Course(idCourseM, description, new SetThematicAreas().retrieve(thematicArea)));
+                new SetCourses().update(new Course(idCourseM, description, new SetThematicAreas().retrieve(thematicArea), promotion));
                 response.sendRedirect("listcourses.jsp");
             } catch (NumberFormatException | IOException | SQLException ex1) {
                 request.setAttribute("message", "No es posible accesar a la información");
